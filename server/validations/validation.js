@@ -60,3 +60,34 @@ export const validateNewUser = async (user) => {
     }
   }
 }
+
+export const validateUser = (user) => {
+  user.email = user.email.trim()
+  user.password = user.password.trim()
+  const errors = {}
+
+  if(isEmpty(user.email)){
+    errors.email = "Please provide your email address";
+  }
+
+  if(isEmpty(user.password)){
+    errors.password = "Please provide your password";
+  }
+
+  const validatedEmail = validateEmail(user.email)
+
+  if(!isEmpty(user.email) && !validatedEmail){
+    errors.invalid_email = "Please provide a properly formatted email address";
+  }
+
+  if(!isEmpty(errors)){
+    return {
+      isValidated: false,
+      errors
+    }
+  }else{
+    return {
+      isValidated: true
+    }
+  }
+}
