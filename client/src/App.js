@@ -11,18 +11,23 @@ import Navbar from './components/navbar/Navbar';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import RecoverPassword from './components/recover-password/RecoverPassword';
+import PrivateRoute from './components/private/PrivateRoute';
+import Dashboard from './components/private/dashboard/Dashboard';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <div>
-          <Navbar />
-          <Route exact path="/" component={Home}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/register" component={Register}/>
-          <Route path="/recover-password" component={RecoverPassword}/>
-        </div>
+        <Switch>
+          <div>
+            <Navbar />
+            <Route restricted={false} exact path="/" component={Home}/>
+            <Route restricted={true} path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route path="/recover-password" component={RecoverPassword}/>
+            <PrivateRoute component={Dashboard} path="/dashboard" exact />
+          </div>
+        </Switch>
       </Router>
     </div>
   );
