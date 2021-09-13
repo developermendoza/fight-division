@@ -14,6 +14,7 @@ app.use(express.urlencoded({limit:"30mb", extended:true}));
 
 app.use(cors());
 
+app.use("/user", userRoutes)
 
 const PORT = process.env.PORT || 5000;
 
@@ -21,4 +22,4 @@ mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true, useUnifiedTop
   .then( () => app.listen(PORT, ()=>console.log(`server running on port: ${PORT}`)))
   .catch((error) => console.log("error connecting to the database: ", error.message));
 
-app.use("/users", userRoutes)
+

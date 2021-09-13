@@ -3,7 +3,7 @@ import { getUsers, registerUser, loginUser } from "../controllers/users.js";
 
 const router = express.Router();
 
-router.get("/", getUsers);
+router.get("/list", getUsers);
 router.post("/register", registerUser);
 router.post("/login", loginUser)
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
@@ -15,11 +15,28 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useStyles } from "./styles";
-import { Link } from "react-router-dom"
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../utils";
 
 export default function Navbar() {
   const classes = useStyles();
   const [state, setState] = useState({left: false});
+  const [ user, setUser ] = useState(JSON.parse(localStorage.getItem("authorized")));
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation()
+
+  const handleLogout = () => {
+    logout()
+    history.push("/logout")
+  }
+
+  useEffect(()=>{
+    const token = user?.token;
+    // console.log("props from use effect: ", props.authData)
+    setUser(JSON.parse(localStorage.getItem("authorized")))
+  },[location])
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -76,9 +93,12 @@ export default function Navbar() {
           <Typography component={Link} to="/" variant="h6" color="inherit" className={classes.title}>
             Logo
           </Typography>
-          <Button component={Link} to="/login" color="inherit">Login</Button>
+          {user ? <Button  onClick={handleLogout} color="inherit">Logout</Button> : <>
+            <Button component={Link} to="/login" color="inherit">Login</Button>
           <span>|</span>
           <Button component={Link} to="/register" color="inherit">Register</Button>
+          </>}
+          
         </Toolbar>
       </AppBar>
     </div>

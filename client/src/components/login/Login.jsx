@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,14 +12,67 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './styles';
-
-
+import { login } from '../../actions/auth';
+import { connect, useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom"
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from '@material-ui/core/IconButton';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import clsx from 'clsx';
 import Copyright from '../copyright/Copyright';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FormHelperText from  '@material-ui/core/FormHelperText';
 
-
-const Login = () => {
+const Login = (props) => {
+  const initialState = {
+    email:"",
+    password:''
+  }
   const classes = useStyles();
+  const [ user, setUser ] = useState(initialState);
+  const dispatch = useDispatch();
+  const history = useHistory()
+  const [ errors, setErrors ] = useState({})
+  const [values, setValues] = React.useState({
+    showPassword: false,
+  });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]:value
+    })
+  }
+
+  const handleClickShowPassword = () => {
+    setValues({ showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(user, history, "login"))
+  }
+
+  useEffect(() => {
+    if(props.errors){
+      setErrors(props.errors)
+    }
+    return () => {
+      dispatch({type:"CLEAR_ERRORS"})
+    };
+  }, [props.errors, dispatch]);
+
+
+// console.log("props: ", props)
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -32,7 +85,7 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -43,18 +96,41 @@ const Login = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              value={user.email}
+              onChange={handleChange}
+              error={errors.email? true : false}
+              helperText={errors?errors.email: null}
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+          <InputLabel htmlFor="password" error={errors.password? true : false}>Password</InputLabel>
+          <OutlinedInput
+            id="password"
+            margin="normal"
+            type={values.showPassword ? 'text' : 'password'}
+            value={user.password}
+            onChange={handleChange}
+            error={errors.password? true : false}
+            name="password"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={70}
+          />
+           {errors && (
+            <FormHelperText error id="errors-password">
+              {errors.password}
+            </FormHelperText>
+          )}
+        </FormControl>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -90,4 +166,11 @@ const Login = () => {
   );
 }
 
-export default Login
+const mapStateToProps = (state, ownProps) => {
+  console.log("state:", state)
+  return {
+    errors: state.auth.errorLogin
+  }
+}
+
+export default connect(mapStateToProps)(Login)

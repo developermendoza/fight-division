@@ -1,9 +1,7 @@
 import User from "../models/User.js";
 
 import bcrypt from "bcrypt";
-import pjwt from "passport-jwt";
 import jwt from "jsonwebtoken";
-import passport from "passport";
 
 import { validateNewUser, validateUser } from "../validations/validation.js";
 
@@ -16,78 +14,37 @@ export const getUsers = async (req, res) => {
   }
 }
 
-export const registerUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   const user = req.body;
-  const { errors, isValidated } = await validateNewUser(user);
-
-  if(!isValidated){
-    res.status(403).json(errors)
-  }else{
-    bcrypt.genSalt(10, (err, salt)=>{
-      bcrypt.hash(user.password, salt, (err, hash)=>{
-
-        const newUser = new User({
-          email: user.email,
-          username: user.username,
-          password: hash
-        });
-        newUser.save()
-          .then(data => {
-            const payload = {
-              id:data.id,
-              username: data.username
-            }
-
-            jwt.sign(payload, process.env.SECRETORKEY, {
-              expiresIn:31556926
-            }, (err, token)=>{
-              res.json({success:true, token: "Bearer " + token, data})
-            })
-            res.status(201)
-          })
-          .catch(error => {
-            res.status(409)
-            res.json(error)
-        })
-      })
-    })
+  try {
+    const { isValidated, errors } = await validateUser(user);
+    if(!isValidated){
+      return res.status(400).json(errors)
+    }else{
+      const existingUser = await User.findOne({email: user.email});
+      const token = jwt.sign({email: existingUser.email, id:existingUser._id}, process.env.SECRETORKEY, {expiresIn:"1h"});
+      return res.status(200).json({result:existingUser, token})
+    }
+  } catch (error) {
+    res.status(500).json({message:"Something went wrong"})
   }
 }
 
-export const loginUser = (req, res) => {
+export const registerUser = async (req, res) => {
 
   const user = req.body;
 
-  const { errors, isValidated } = validateUser(user);
+  try {
+    const {isValidated, errors} = await validateNewUser(user)
+    if(!isValidated){
+      return res.status(400).json(errors)
+    }
 
-  if(!isValidated){
-    res.status(403)
-    res.json(errors)
-  }else{
-    User.findOne({email:user.email}).then( userFound => {
-      if(!userFound){
-        return res.status(404).json({email: "Email was not found"})
-      }
-      bcrypt.compare(user.password, userFound.password).then(isMatch => {
-        if(isMatch){
-          const payload = {
-            id: userFound.id,
-            username: userFound.username
-          }
-          jwt.sign(payload, process.env.SECRETORKEY, {
-            expiresIn: 31556926
-          }, (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token,
-              user:userFound
-            })
-          })
-        }else{
-          res.status(403)
-          res.json({password: "The password is incorrect"})
-        }
-      })
-    })
+    const hashedPassword = await bcrypt.hash(user.password, 12);
+    const result = await User.create({ email:user.email, password: hashedPassword, username: user.username});
+    const token = jwt.sign({email: result.email, id: result._id}, process.env.SECRETORKEY, {expiresIn:"1h"});
+    res.status(200).json({result, token})
+  } catch (error) {
+    res.status(500).json({message:"Something went wrong"})
   }
 }
