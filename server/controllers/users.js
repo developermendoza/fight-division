@@ -5,9 +5,14 @@ import jwt from "jsonwebtoken";
 
 import { validateNewUser, validateUser } from "../validations/validation.js";
 
+
 export const getUsers = async (req, res) => {
+  console.log("getUsers")
   try {
     const users = await User.find();
+    console.log("users: ", users)
+    res.header('Access-Control-Expose-Headers', 'Content-Range')
+    res.header('Content-Range','bytes : 0-9/*')
     res.status(200).json(users)
   } catch (error) {
     res.status(404).json(error)
@@ -48,3 +53,5 @@ export const registerUser = async (req, res) => {
     res.status(500).json({message:"Something went wrong"})
   }
 }
+
+

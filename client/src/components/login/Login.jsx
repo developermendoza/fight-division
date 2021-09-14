@@ -21,7 +21,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
 import clsx from 'clsx';
 import Copyright from '../copyright/Copyright';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -72,7 +71,6 @@ const Login = (props) => {
   }, [props.errors, dispatch]);
 
 
-// console.log("props: ", props)
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -88,7 +86,6 @@ const Login = (props) => {
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
-              margin="normal"
               required
               fullWidth
               id="email"
@@ -105,12 +102,12 @@ const Login = (props) => {
           <InputLabel htmlFor="password" error={errors.password? true : false}>Password</InputLabel>
           <OutlinedInput
             id="password"
-            margin="normal"
             type={values.showPassword ? 'text' : 'password'}
             value={user.password}
             onChange={handleChange}
             error={errors.password? true : false}
             name="password"
+            autoComplete="current-password"
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -167,7 +164,6 @@ const Login = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("state:", state)
   return {
     errors: state.auth.errorLogin
   }

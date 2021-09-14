@@ -123,30 +123,16 @@ const Register = (props) => {
               />
             </Grid>
             <Grid item xs={12}>
-              {/* <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={user.password}
-                onChange={handleChange}
-                error={errors.password? true : false}
-                helperText={errors?errors.password: null}
-              /> */}
               <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                 <InputLabel htmlFor="password" error={errors.password? true : false}>Password</InputLabel>
                 <OutlinedInput
                   id="password"
-                  margin="normal"
                   type={values.showPassword ? 'text' : 'password'}
                   value={user.password}
                   onChange={handleChange}
                   error={errors.password? true : false}
                   name="password"
+                  autoComplete="new-password"
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -169,30 +155,16 @@ const Register = (props) => {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              {/* <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                id="confirmPassword"
-                autoComplete="confirm-password"
-                value={user.confirmPassword}
-                onChange={handleChange}
-                error={errors.confirmPassword? true : false}
-                helperText={errors?errors.confirmPassword: null}
-              /> */}
               <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                 <InputLabel htmlFor="confirmPassword" error={errors.confirmPassword? true : false}>Password</InputLabel>
                 <OutlinedInput
                   id="confirmPassword"
-                  margin="normal"
                   type={values.showConfirmPassword ? 'text' : 'password'}
                   value={user.confirmPassword}
                   onChange={handleChange}
                   error={errors.confirmPassword? true : false}
                   name="confirmPassword"
+                  autoComplete="new-password"
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
