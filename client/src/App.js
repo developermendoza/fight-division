@@ -15,6 +15,7 @@ import Dashboard from './components/private/dashboard/Dashboard';
 import PublicRoute from './components/publicRoute/PublicRoute';
 import Logout from './components/logout/Logout';
 import Admin from "./components/admin/Admin";
+import Events from './components/events/Events';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
             <PublicRoute restricted={true}  path="/recover-password" component={RecoverPassword} />
             <PublicRoute restricted={true}  path="/logout" component={Logout} />
             <PrivateRoute path="/dashboard" component={Dashboard}  />
-            
+            <PublicRoute restricted={false}  path="/events" component={Events} exact/>
           </div>
         </Switch>
       </Router>

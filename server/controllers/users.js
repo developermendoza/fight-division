@@ -7,7 +7,6 @@ import { validateNewUser, validateUser } from "../validations/validation.js";
 
 
 export const getUsers = async (req, res) => {
-  console.log("getUsers")
   try {
     const users = await User.find();
     console.log("users: ", users)

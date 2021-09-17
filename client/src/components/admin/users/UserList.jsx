@@ -1,7 +1,7 @@
 import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, EmailField, NumberField} from "react-admin"
 const UserList = (props) => {
   return (
-    <List {...props}>
+    <List {...props} perPage={25}>
       <Datagrid>
         <TextField source="id" />
         <EmailField source="email" />

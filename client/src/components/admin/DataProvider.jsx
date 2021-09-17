@@ -4,7 +4,7 @@ import { stringify } from 'query-string';
 const apiUrl = 'http://localhost:3000/admin';
 const httpClient = fetchUtils.fetchJson;
 
-const dataProvider = {
+const DataProvider =  {
     getList: (resource, params) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
@@ -22,10 +22,10 @@ const dataProvider = {
         }));
     },
 
-      getOne: (resource, params) =>
+    getOne: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-            // data: json,
-           ...json, id:json._id
+          // data: {...json, id:json._id},
+          data: {...json, id: json._id},
         })),
 
     getMany: (resource, params) => {
@@ -33,10 +33,7 @@ const dataProvider = {
             filter: JSON.stringify({ id: params.ids }),
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        return httpClient(url).then(({ json }) => ({ 
-          // data: json 
-          data: json.map(resource => ({ ...resource, id: resource._id }) ),
-        }));
+        return httpClient(url).then(({ json }) => ({ data: json }));
     },
 
     getManyReference: (resource, params) => {
@@ -53,8 +50,7 @@ const dataProvider = {
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
         return httpClient(url).then(({ headers, json }) => ({
-            // data: json,
-            data: json.map(resource => ({ ...resource, id: resource._id }) ),
+            data: json,
             total: parseInt(headers.get('content-range').split('/').pop(), 10),
         }));
     },
@@ -63,9 +59,8 @@ const dataProvider = {
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ 
-          // data: json 
-        ...json, id:json._id
+        }).then(({ json }) => ({
+         data: {...json, id:json._id}
         })),
 
     updateMany: (resource, params) => {
@@ -83,17 +78,15 @@ const dataProvider = {
             method: 'POST',
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
-            // data: { ...params.data, id: json.id },
-            data: { ...params.data, id: json._id },
+            data: { ...params.data, id: json._id }
         })),
 
     delete: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'DELETE',
-        }).then(({ json }) => ({ 
-          // data: json 
-          ...json, id: json._id 
-        })),
+        }).then(({ json }) => (
+        {  data: json }
+        )),
 
     deleteMany: (resource, params) => {
         const query = {
@@ -106,4 +99,4 @@ const dataProvider = {
     },
 };
 
-export default dataProvider;
+export default DataProvider;

@@ -20,7 +20,8 @@ const createAdminStore = ({
   });
   const resettableAppReducer = (state, action) =>
       reducer(action.type !== USER_LOGOUT ? state : undefined, action);
-
+        // reducer(state);
+        // debugger;
   const saga = function* rootSaga() {
       yield all(
           [

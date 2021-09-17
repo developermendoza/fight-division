@@ -18,14 +18,25 @@ import { useStyles } from "./styles";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../utils";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
+import { Container } from '@material-ui/core';
+
+
 
 export default function Navbar() {
   const classes = useStyles();
+  const matches = useMediaQuery('(min-width:600px)');
   const [state, setState] = useState({left: false});
   const [ user, setUser ] = useState(JSON.parse(localStorage.getItem("authorized")));
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation()
+  const location = useLocation();
+
+
 
   const handleLogout = () => {
     logout()
@@ -76,9 +87,11 @@ export default function Navbar() {
   );
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <div className={classes.root} style={{paddingTop: !matches? "26px" : "108px"}}>
+      <AppBar  className={classes.topNavbar}>
+      <Container>
         <Toolbar>
+        {!matches &&<>
           <IconButton onClick={toggleDrawer("left", true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
@@ -90,16 +103,18 @@ export default function Navbar() {
           >
             {list("left")}
           </SwipeableDrawer>
-          <Typography component={Link} to="/" variant="h6" color="inherit" className={classes.title}>
-            Logo
+        </> }
+          <Typography component={Link} to="/" variant="h6" color="inherit" style={{textAlign: !matches? "right" : "left" }} className={`${classes.title} logo`}>
+            Underground <span className="primary-text-color">Fighter</span>
           </Typography>
-          {user ? <Button  onClick={handleLogout} color="inherit">Logout</Button> : <>
-            <Button component={Link} to="/login" color="inherit">Login</Button>
-          <span>|</span>
-          <Button component={Link} to="/register" color="inherit">Register</Button>
+          {matches && <>
+            {user ? <Button  onClick={handleLogout} color="inherit">Logout</Button> : <>
+            <Button component={Link} to="/login" color="inherit" className="btn">Login</Button>
+          <Button component={Link} to="/register" color="inherit" className="btn btn-primary">Signup</Button>
           </>}
-          
+          </>}
         </Toolbar>
+        </Container>
       </AppBar>
     </div>
   );
