@@ -85,8 +85,7 @@ export default function Navbar() {
       </List>
     </div>
   );
-
-  return (
+  return location.pathname === "/admin" ? null : 
     <div className={classes.root} style={{paddingTop: !matches? "26px" : "108px"}}>
       <AppBar  className={classes.topNavbar}>
       <Container>
@@ -117,5 +116,5 @@ export default function Navbar() {
         </Container>
       </AppBar>
     </div>
-  );
+  
 }

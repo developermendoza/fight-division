@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -25,6 +25,7 @@ import clsx from 'clsx';
 import Copyright from '../copyright/Copyright';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from  '@material-ui/core/FormHelperText';
+import { userAuthenticated } from '../../utils';
 
 const Login = (props) => {
   const initialState = {
@@ -69,6 +70,10 @@ const Login = (props) => {
       dispatch({type:"CLEAR_ERRORS"})
     };
   }, [props.errors, dispatch]);
+
+  // useEffect(() => {
+  //   userAuthenticated ? <Redirect to="/login" />
+  // }, [input])
 
 
   return (
