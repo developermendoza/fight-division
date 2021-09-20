@@ -2,7 +2,6 @@ import express from "express";
 import { getUsers, addUser, deleteUser, getUser, updateUser } from "../controllers/admin.js";
 
 const router = express.Router();
-// router.put("/users/:id", updateUser)
 
 router.get("/users", getUsers);
 router.get("/users/:id", getUser);

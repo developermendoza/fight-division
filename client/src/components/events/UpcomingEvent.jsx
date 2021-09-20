@@ -4,7 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import { useStyles } from './styles';
 import Paper from '@material-ui/core/Paper';
 import Countdown from "react-countdown";
-import moment from "moment"
+import moment from "moment";
+import MainEventMatch from "../matches/MainEventMatch";
 
 // Random component
 const Completionist = () => <span>You are good to go!</span>;
@@ -20,9 +21,9 @@ const renderer = ({ days ,hours, minutes, seconds, completed }) => {
   }
 };
 
-
-function UpcomingEvent({upcomingEvent} ) {
+function UpcomingEvent({upcomingEvent, mainEvent}) {
 const [ event, setEvent ] = useState();
+const [ match, setMatch ] = useState();
 const classes = useStyles();
 
 
@@ -30,7 +31,12 @@ useEffect(() => {
   if(upcomingEvent){
     setEvent(upcomingEvent)
   }
-},[upcomingEvent]);
+
+  if(mainEvent){
+    setMatch(mainEvent)
+  }
+},[upcomingEvent, mainEvent, match]);
+
   return (
     <Container>
       <Paper className="paper" >
@@ -39,15 +45,11 @@ useEffect(() => {
             <h2 className={`${classes.eventTitle} primary-text-color`}>{event? event.name.toUpperCase(): <>No event</>}</h2>
             <p className={classes.subText}>{ event? moment(event.date).format('dddd, MMMM DD YYYY') : <>No Event Date</>}</p>
           </Grid>
-          <Grid item  md={6}>
-              <p className={classes.mainEventFighters}>{ event? <>{event.fighter1.lastName.toUpperCase()} VS {event.fighter2.lastName.toUpperCase()}</> : <>No fighters available</> }</p>
-              <p className={classes.subText}>{event?<>{event.venue}</>:<>No venue available</>}</p>
-              <p className={classes.subText}>{event? <>{event.location}</>:<>No location availble</>}</p>
-          </Grid>
+          {match ? <MainEventMatch match={match} />  : <>Loading...</>}
         <Grid item  md={3}>
           <h2 className={classes.eventCounterText}>COUNTDOWN</h2>
             <div> {event ?<><p className={`${classes.eventCounter} primary-text-color`}>{<Countdown
-            date={event.earlyPrelimCardTime}
+            date={event.earlyPrelimTime}
             renderer={renderer}
           />}</p><p className={classes.subText}>DAYS | HRS | MINS | SECS</p></> :<><p className={`${classes.eventCounter} primary-text-color`}>&#8734; : &#8734; : &#8734; : &#8734;</p><p className={classes.subText}>DAYS | HRS | MINS | SECS</p></>}</div>
         </Grid>

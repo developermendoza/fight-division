@@ -1,5 +1,4 @@
 import User from "../models/User.js";
-
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -9,7 +8,6 @@ import { validateNewUser, validateUser } from "../validations/validation.js";
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find();
-    console.log("users: ", users)
     res.header('Access-Control-Expose-Headers', 'Content-Range')
     res.header('Content-Range','bytes : 0-9/*')
     res.status(200).json(users)
@@ -36,14 +34,12 @@ export const loginUser = async (req, res) => {
 
 export const registerUser = async (req, res) => {
 
-  const user = req.body;
-
   try {
+    const user = req.body;
     const {isValidated, errors} = await validateNewUser(user)
     if(!isValidated){
       return res.status(400).json(errors)
     }
-
     const hashedPassword = await bcrypt.hash(user.password, 12);
     const result = await User.create({ email:user.email, password: hashedPassword, username: user.username});
     const token = jwt.sign({email: result.email, id: result._id}, process.env.SECRETORKEY, {expiresIn:"1h"});

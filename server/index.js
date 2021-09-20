@@ -6,6 +6,13 @@ import passport from "passport";
 
 import userRoutes from "./routes/users.js";
 import adminRoutes from "./routes/admin.js";
+import fightersRoutes from "./routes/fighters.js";
+import matchesRoutes from "./routes/matches.js";
+import eventsRoutes from "./routes/events.js";
+import networksRoutes from "./routes/networks.js";
+import organizationsRoutes from "./routes/organizations.js";
+import sportsRoutes from "./routes/sports.js";
+import weightsRoutes from "./routes/weights.js";
 
 dotenv.config();
 const app = express();
@@ -32,4 +39,12 @@ mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true, useUnifiedTop
 
   app.use("/user", userRoutes)
   app.use("/admin", adminRoutes)
+  app.use("/weights", weightsRoutes)
+  app.use("/organizations", organizationsRoutes)
+  app.use("/sports", sportsRoutes)
+  app.use("/networks", networksRoutes)
+  app.use("/fighters", fightersRoutes)
+  app.use("/matches", matchesRoutes)
+  app.use("/events", eventsRoutes)
+ 
 

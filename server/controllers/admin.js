@@ -28,7 +28,6 @@ export const getUser = async (req, res) => {
 }
 
 export const addUser = async (req, res) => {
-  console.log("addUser")
   const user = req.body;
   try {
     const hashedPassword = await bcrypt.hash(user.password, 12);
@@ -41,8 +40,6 @@ export const addUser = async (req, res) => {
 
     const result = await newUser.save();
 
-    // console.log("result._doc: ", result._doc)
-
     res.status(200).json(result)
   } catch (error) {
     res.status(500).json({message:"Something went wrong"})
@@ -50,7 +47,6 @@ export const addUser = async (req, res) => {
 }
 
 export const deleteUser = async (req, res) => {
-  console.log("deleteUser")
   const {id} = req.params;
   try {
     const result = await User.findByIdAndDelete(id);

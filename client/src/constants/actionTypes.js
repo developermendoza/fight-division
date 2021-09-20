@@ -2,3 +2,6 @@ export const AUTH = "AUTH";
 export const ERROR = "ERROR";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const FETCH_ALL = "FETCH_ALL";
+export const FETCH_UPCOMING_EVENT = "FETCH_UPCOMING_EVENT";
+export const FETCH_MAIN_EVENT_MATCH = "FETCH_MAIN_EVENT_MATCH";
+export const FETCH_MATCHES_BY_EVENT_ID = "FETCH_MATCHES_BY_EVENT_ID";

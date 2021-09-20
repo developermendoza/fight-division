@@ -22,5 +22,14 @@ export const useStyles = makeStyles((theme) => ({
   odds:{
     color:"#68bbe5",
     fontWeight:"bold"
-  }
+  },
+  subText:{
+    color:"#7D7D7D",
+    fontSize:"16px",
+    letterSpacing:"1px"
+  },
+  mainEventFighters:{
+    fontSize:"24px",
+    fontWeight: "bold"
+  },
 }));
