@@ -1,9 +1,10 @@
+import { Container } from "@material-ui/core"
 
 function Dashboard() {
   return (
-    <div>
+    <Container>
       dashboard
-    </div>
+    </Container>
   )
 }
 

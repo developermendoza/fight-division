@@ -17,6 +17,7 @@ import Logout from './components/logout/Logout';
 import Admin from "./components/admin/Admin";
 import Events from './components/events/Events';
 import NotFound from "./components/404/NotFound";
+import Picks from './components/private/picks/Picks';
 
 
 
@@ -34,6 +35,7 @@ function App() {
             <PublicRoute restricted={true}  path="/recover-password" component={RecoverPassword} exact/>
             <PublicRoute restricted={true}  path="/logout" component={Logout} exact/>
             <PrivateRoute path="/dashboard" component={Dashboard}  exact/>
+            <PrivateRoute path="/picks" component={Picks}  exact/>
             <PublicRoute restricted={false}  path="/events" component={Events} exact/>
             <PublicRoute restricted={false}  path="*" component={NotFound} exact/>
         </Switch>
