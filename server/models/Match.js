@@ -61,7 +61,7 @@ const matchSchema = mongoose.Schema({
     matchOutcomeMethod:{
       type: mongoose.Schema.Types.ObjectId,
       default: null,
-      ref:"MatchOutcomeMethods"
+      ref:"MatchOutcomeMethod"
     },
     round:{
       type: String,

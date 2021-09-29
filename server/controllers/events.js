@@ -15,7 +15,8 @@ export const getEvents = async (req, res) => {
 export const getUpcomingEvent = async (req, res) => {
   
   try {
-    const data = await Event.findOne().populate("mainCardNetwork prelimNetwork earlyPrelimNetwork").populate({path:"organization", populate:{path:"sport"}}).sort({mainCardTime: -1});
+    const today = new Date()
+    const data = await Event.findOne({mainCardTime: {$gte:today}}).populate("mainCardNetwork prelimNetwork earlyPrelimNetwork").populate({path:"organization", populate:{path:"sport"}}).sort({mainCardTime: 1})
     res.header('Access-Control-Expose-Headers', 'Content-Range')
     res.header('Content-Range','bytes : 0-9/*')
 
@@ -23,6 +24,8 @@ export const getUpcomingEvent = async (req, res) => {
       id: data.id,
       ...data._doc
     }
+
+    console.log("event: ", event)
 
     res.status(200).json(event)
     } catch (error) {
@@ -48,14 +51,14 @@ export const addEvent = async (req, res) => {
 
   try {
     let {name, location, venue, date, mainCardTime, prelimTime, earlyPrelimTime, mainCardNetwork, prelimNetwork, earlyPrelimNetwork, organization} = req.body;
-  mainCardNetwork = mongoose.Types.ObjectId(mainCardNetwork);
-  prelimNetwork = mongoose.Types.ObjectId(prelimNetwork);
-  earlyPrelimNetwork = mongoose.Types.ObjectId(earlyPrelimNetwork);
+  mainCardNetwork = mainCardNetwork !== "" ? mongoose.Types.ObjectId(mainCardNetwork) : null;
+  prelimNetwork = prelimNetwork !== "" ? mongoose.Types.ObjectId(prelimNetwork) : null;
+  earlyPrelimNetwork = earlyPrelimNetwork !== "" ? mongoose.Types.ObjectId(earlyPrelimNetwork) : null;
   organization = mongoose.Types.ObjectId(organization);
   date = new Date(date)
-  mainCardTime = new Date(mainCardTime)
-  prelimTime = new Date(prelimTime)
-  earlyPrelimTime = new Date(earlyPrelimTime)
+  mainCardTime = mainCardTime !== "" ? new Date(mainCardTime) : null;
+  prelimTime = prelimTime !== "" ? new Date(prelimTime) : null;
+  earlyPrelimTime = earlyPrelimTime !== "" ? new Date(earlyPrelimTime) : null;
 
   const event = new Event({
     name,
@@ -73,7 +76,11 @@ export const addEvent = async (req, res) => {
     updatedAt: null
   });
 
+  console.log("event: ", event)
+
   const data = await event.save()
+
+  console.log("data: ", data)
 
     res.status(200).json(data)
   } catch (error) {

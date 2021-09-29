@@ -7,3 +7,4 @@ export const loginUser = (user) => API.post(`/user/login`, user);
 export const fetchEvents = () => API.get(`/events`);
 export const fetchUpcomingEvent = () => API.get(`/events/getUpcomingEvent`);
 export const fetchMatchesByEventId = (id) => API.get(`/matches/getMatchesByEventId/${id}`);
+export const fetchMatchOutcomeMethods = () => API.get(`/matchOutcomeMethods`);

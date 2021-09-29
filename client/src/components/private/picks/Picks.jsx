@@ -3,11 +3,13 @@ import React,{useEffect, useState} from 'react'
 import { getUpcomingEvent } from "../../../actions/events";
 import { getMatchesByEventId } from "../../../actions/matches";
 import { useDispatch, useSelector } from "react-redux";
+import { getMatchOutcomeMethods } from "../../../actions/matchOutcomeMethods";
 
 function Picks() {
 
   const dispatch = useDispatch()
   const event = useSelector(state => state.events.data);
+  const matchOutcomeMethods = useSelector(state => state.matchOutcomeMethods.data);
   const matches = useSelector(state => state.matches.data);
   const [ round, setRound ] = useState({})
   const [ outcome, setOutcome ] = useState({})
@@ -15,23 +17,54 @@ function Picks() {
   const [ fighterName, setFighterName ] = useState({})
   const [ pickedMatches, setPickedMatches ] = useState([]);
 
-  const handleChange = (selection,e) => {
+  const handleChange = (selection,matchId,e) => {
+
+    console.log("e: ", e)
+    console.log("e.target: ", e.target)
 
      if(selection === "round"){
       setRound({
         ...round,
         [e.target.name]: e.target.value
       })
+      // if the outcome is decision or draw and the user picks a round that is not the last one
+      if((outcome[`outcome-${matchId}`] === "decision" || outcome[`outcome-${matchId}`]=== "draw") &&( e.target.value !== "5")) {
+        // unselect the radio button
+        setOutcome({
+          ...outcome,
+          [`outcome-${matchId}`]: false
+        })
+      }
+        
     }
 
     if(selection === "outcome"){
+
       setOutcome({
         ...outcome,
         [e.target.name]: e.target.value
       })
+       // if user picks decision or draw
+      if(( e.target.value === "decision" ||  e.target.value === "draw")){
+        // select the last round automatically
+        setRound({
+          ...round,
+          [`round-${matchId}`]: "5"
+        })
+      }
+      // if a fighter is selected and the user picks draw
+      if(fighter[`fighter-${matchId}`] && (e.target.value === "draw" || e.target.value === "no contest")  ){
+        // unselect the selected fighter
+        setFighter({
+          ...fighter,
+          [`fighter-${matchId}`]:false,
+        })
+      }
     }
 
     if(selection === "fighter"){
+
+
       setFighter({
         ...fighter,
         [e.target.name]:e.target.value,
@@ -41,6 +74,16 @@ function Picks() {
         ...fighterName,
         [e.target.name]:e.target.labels[0].innerText
       })
+
+      // if the draw or no contest radio buttons are already selected
+      if(outcome[`outcome-${matchId}`] === "draw" || outcome[`outcome-${matchId}`] === "no contest"){
+        // unselect the outcome methods radio button
+        setOutcome({
+          ...outcome,
+          [`outcome-${matchId}`]: false
+        })
+      }
+        
     }
   }
 
@@ -50,10 +93,10 @@ function Picks() {
       ...pickedMatches,
       {
         matchId: match,
-        fighterId: fighter[`fighter-${match}`],
-        outcomeId: outcome[`outcome-${match}`],
-        round: round[`round-${match}`],
-        fighterName: fighterName[`fighter-${match}`]
+        fighterId: fighter[`fighter-${match}`] ? fighter[`fighter-${match}`] : null,
+        outcomeId: outcome[`outcome-${match}`] ? outcome[`outcome-${match}`]  : null,
+        round: round[`round-${match}`] ? round[`round-${match}`] : null,
+        fighterName: fighterName[`fighter-${match}`] ? fighterName[`fighter-${match}`] : null
       }
     ])
   }
@@ -65,6 +108,7 @@ function Picks() {
 
   useEffect(() => {
     dispatch(getUpcomingEvent())
+    dispatch(getMatchOutcomeMethods())
   }, [dispatch])
 
   useEffect(() => {
@@ -73,7 +117,7 @@ function Picks() {
     }
   }, [event, dispatch])
 
-  // console.log("matches: ", matches)
+  console.log("matchOutcomeMethods: ", matchOutcomeMethods)
   return (
     <Container>
     <form action="" onSubmit={handleSubmit}>
@@ -88,8 +132,7 @@ function Picks() {
                 aria-label="fighter-0"
                 defaultValue={fighter.val}
                 name="fighter-6147adb7d8cd3e56f73fd12b"
-                onChange={(e) => handleChange("fighter", e)}
-                data-fighter={`Alexander "The Great" Volkanovski`}
+                onChange={(e) => handleChange("fighter","6147adb7d8cd3e56f73fd12b", e)}
               >
               <Grid container spacing={1}>
                 <Grid item xs={12} md={6}>
@@ -109,7 +152,7 @@ function Picks() {
                 aria-label="rounds"
                 defaultValue={round.val}
                 name="round-6147adb7d8cd3e56f73fd12b"
-                onChange={(e)=> handleChange("round", e)}
+                onChange={(e)=> handleChange("round","6147adb7d8cd3e56f73fd12b", e)}
               >
               <Grid container>
                 <Grid item xs={12} md={2}>
@@ -138,7 +181,7 @@ function Picks() {
                 aria-label="outcome"
                 defaultValue={outcome.val}
                 name="outcome-6147adb7d8cd3e56f73fd12b"
-                onChange={(e)=>handleChange("outcome", e)}
+                onChange={(e)=>handleChange("outcome","6147adb7d8cd3e56f73fd12b",e)}
               >
               <Grid container>
                 <Grid item xs={12} md={6}>
@@ -181,7 +224,7 @@ function Picks() {
                 aria-label="fighter"
                 defaultValue={fighter.val}
                 name="fighter-6147c38e4e8a0c53b5c0680c"
-                onChange={(e)=>handleChange("fighter", e)}
+                onChange={(e)=>handleChange("fighter","6147c38e4e8a0c53b5c0680c", e)}
               >
               <Grid container spacing={1}>
                 <Grid item xs={12} md={6}>
@@ -201,7 +244,7 @@ function Picks() {
                 aria-label="rounds"
                 defaultValue={round.val}
                 name="round-6147c38e4e8a0c53b5c0680c"
-                onChange={(e)=>handleChange("round", e)}
+                onChange={(e)=>handleChange("round","6147c38e4e8a0c53b5c0680c", e)}
               >
               <Grid container>
                 <Grid item xs={12} md={2}>
@@ -230,7 +273,7 @@ function Picks() {
                 aria-label="outcome"
                 defaultValue={outcome.val}
                 name="outcome-6147c38e4e8a0c53b5c0680c"
-                onChange={(e)=>handleChange("outcome", e)}
+                onChange={(e)=>handleChange("outcome","6147c38e4e8a0c53b5c0680c", e)}
               >
               <Grid container spacing={1}>
                 <Grid item xs={12} md={6}>

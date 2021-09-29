@@ -12,7 +12,11 @@ body{
 }
 
 a.logo{
-  color: #68BBE5
+  color: #68BBE5;
+}
+
+li{
+  list-style-type: none;
 }
 
 a.btn{

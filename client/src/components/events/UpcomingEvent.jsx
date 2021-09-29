@@ -27,6 +27,8 @@ const [ match, setMatch ] = useState();
 const classes = useStyles();
 
 
+
+
 useEffect(() => {
   if(upcomingEvent){
     setEvent(upcomingEvent)
@@ -36,6 +38,16 @@ useEffect(() => {
     setMatch(mainEvent)
   }
 },[upcomingEvent, mainEvent, match]);
+
+const eventDate = (event) => {
+  if(event.earlyPrelimTime){
+    return event.earlyPrelimTime
+  }else if(!event.earlyPrelimTime && event.prelimTime){
+    return event.prelimTime
+  }else{
+    return event.mainCardTime;
+  }
+}
 
   return (
     <Container>
@@ -49,7 +61,7 @@ useEffect(() => {
         <Grid item  md={3}>
           <h2 className={classes.eventCounterText}>COUNTDOWN</h2>
             <div> {event ?<><p className={`${classes.eventCounter} primary-text-color`}>{<Countdown
-            date={event.earlyPrelimTime}
+            date={eventDate(event)}
             renderer={renderer}
           />}</p><p className={classes.subText}>DAYS | HRS | MINS | SECS</p></> :<><p className={`${classes.eventCounter} primary-text-color`}>&#8734; : &#8734; : &#8734; : &#8734;</p><p className={classes.subText}>DAYS | HRS | MINS | SECS</p></>}</div>
         </Grid>

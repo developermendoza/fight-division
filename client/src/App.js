@@ -18,6 +18,7 @@ import Admin from "./components/admin/Admin";
 import Events from './components/events/Events';
 import NotFound from "./components/404/NotFound";
 import Picks from './components/private/picks/Picks';
+import Footer from './components/footer/Footer';
 
 
 
@@ -39,6 +40,7 @@ function App() {
             <PublicRoute restricted={false}  path="/events" component={Events} exact/>
             <PublicRoute restricted={false}  path="*" component={NotFound} exact/>
         </Switch>
+        <Footer />
       </Router>
     </div>
   );

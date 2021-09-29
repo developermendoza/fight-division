@@ -13,6 +13,7 @@ import networksRoutes from "./routes/networks.js";
 import organizationsRoutes from "./routes/organizations.js";
 import sportsRoutes from "./routes/sports.js";
 import weightsRoutes from "./routes/weights.js";
+import matchOutcomeMethodsRoutes from "./routes/matchOutcomeMethods.js";
 
 dotenv.config();
 const app = express();
@@ -46,5 +47,6 @@ mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true, useUnifiedTop
   app.use("/fighters", fightersRoutes)
   app.use("/matches", matchesRoutes)
   app.use("/events", eventsRoutes)
+  app.use("/matchOutcomeMethods", matchOutcomeMethodsRoutes)
  
 

@@ -6,6 +6,8 @@ import { getUpcomingEvent } from '../../actions/events';
 import { getMatchesByEventId } from '../../actions/matches';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
+import Banner from "./Banner";
+import Leaderboard from "../leaderboard/Leaderboard";
 
 function Home() {
   const dispatch = useDispatch();
@@ -45,6 +47,8 @@ function Home() {
       <LandingHero />
       <UpcomingEvent upcomingEvent={upcomingEvent} mainEvent={mainEvent} />
       <Matches matches={matches}/>
+      <Banner />
+      <Leaderboard />
     </div>
   )
 }
