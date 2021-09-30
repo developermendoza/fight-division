@@ -38,7 +38,7 @@ mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true, useUnifiedTop
   .then( () => app.listen(PORT, ()=>console.log(`server running on port: ${PORT}`)))
   .catch((error) => console.log("error connecting to the database: ", error.message));
 
-  app.use("/user", userRoutes)
+  app.use("/users", userRoutes)
   app.use("/admin", adminRoutes)
   app.use("/weights", weightsRoutes)
   app.use("/organizations", organizationsRoutes)

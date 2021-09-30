@@ -49,4 +49,13 @@ export const registerUser = async (req, res) => {
   }
 }
 
+export const topten = async (req, res) => {
+  try {
+    const topTen = await User.find().sort({totalPoints: -1}).limit(10);
+    res.status(200).json(topTen)
+  } catch (error) {
+    res.status(404).json(error)
+  }
+}
+
 

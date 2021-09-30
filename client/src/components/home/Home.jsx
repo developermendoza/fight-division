@@ -4,6 +4,7 @@ import UpcomingEvent from "../events/UpcomingEvent";
 import Matches from "../matches/Matches";
 import { getUpcomingEvent } from '../../actions/events';
 import { getMatchesByEventId } from '../../actions/matches';
+import { getTopTenUsers } from "../../actions/users";
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from "react";
 import Banner from "./Banner";
@@ -13,6 +14,7 @@ function Home() {
   const dispatch = useDispatch();
   const upcomingEvent = useSelector(state => state.events.data)
   const matches = useSelector(state => state.matches.data);
+  const toptenUsers = useSelector(state => state.users.data);
   const [ mainEvent, setMainEvent ] = useState()
 
   const getMainEvent = (matches) => {
@@ -25,6 +27,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(getUpcomingEvent());
+    dispatch(getTopTenUsers())
   }, [dispatch])
 
   useEffect(() => {
@@ -48,7 +51,7 @@ function Home() {
       <UpcomingEvent upcomingEvent={upcomingEvent} mainEvent={mainEvent} />
       <Matches matches={matches}/>
       <Banner />
-      <Leaderboard />
+      <Leaderboard toptenUsers={toptenUsers} />
     </div>
   )
 }

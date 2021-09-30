@@ -20,5 +20,17 @@ export const useStyles = makeStyles((theme) => ({
     color: "#FDF100",
     fontWeight: "bold",
     fontStyle:"italic"
+  },
+
+  footerSection:{
+    marginBottom: "40px"
+  },
+
+  bottomFooter:{
+    backgroundColor:"#262626",
+    padding: "10px 0",
+    color:"grey",
+    textAlign:"center",
+    fontStyle:"italic"
   }
 }));

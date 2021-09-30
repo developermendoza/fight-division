@@ -30,18 +30,21 @@ export const useStyles = makeStyles((theme) => ({
    display:"flex",
    alignItems:"center",
    color: "white",
-   fontWeight:"bold"
+   fontWeight:"bold",
+   textTransform:"capitalize"
  },
 
  userPointsContainer:{
    textAlign:"right",
    color:"#68bbe5",
-   fontWeight:"bold"
+   fontWeight:"bold",
+   fontSize:"18px"
  },
 
  userPoints:{
   color: "grey",
-  fontWeight:"normal"
+  fontWeight:"normal",
+  fontSize:"14px"
  },
 
  userRank:{
