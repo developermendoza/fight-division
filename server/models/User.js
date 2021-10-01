@@ -31,7 +31,8 @@ const userSchema = mongoose.Schema({
   createdAt: {
     type: Date,
     default: new Date()
-  }
+  },
+  image: String
 });
 
 const User = mongoose.model("User", userSchema);

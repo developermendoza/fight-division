@@ -21,7 +21,7 @@ function Leaderboard({toptenUsers}) {
   const classes = useStyles();
 
   
-  console.log("toptenUsers: ", toptenUsers ? toptenUsers.length : "no")
+  console.log("toptenUsers: ", toptenUsers)
   return (
     <Container>
       <Paper className="paper">
@@ -42,7 +42,7 @@ function Leaderboard({toptenUsers}) {
               <Grid container  alignItems="center" justifyContent="space-between">
                 <Grid item md={6} className={classes.userName}>
                   <p className={user.userRank}>{++i}</p>
-                  <Avatar variant="circular" className={classes.userImage} src="images/fighters/no-fighter.png" />
+                  <Avatar variant="circular" className={classes.userImage} src={user?.image}/>
                   <p>{user.username}</p>
                 </Grid>
                 <Grid item md={6} className={classes.userPointsContainer}>
@@ -56,7 +56,7 @@ function Leaderboard({toptenUsers}) {
               <Grid container  alignItems="center" justifyContent="space-between">
                 <Grid item md={6} className={classes.userName}>
                   <p className={user.userRank}>{j + 6}</p>
-                  <Avatar variant="circular" className={classes.userImage} src="images/fighters/no-fighter.png" />
+                  <Avatar variant="circular" className={classes.userImage} src={user?.image}/>
                   <p>{user.username}</p>
                 </Grid>
                 <Grid item md={6} className={classes.userPointsContainer}>

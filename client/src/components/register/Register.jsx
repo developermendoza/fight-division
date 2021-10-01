@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Link, useHistory, Redirect, Route } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -26,13 +26,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import clsx from 'clsx';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from  '@material-ui/core/FormHelperText';
+import ImageUploading from "react-images-uploading";
 
 const Register = (props) => {
   const initialState = {
     username: "",
     email:"",
     password:"",
-    confirmPassword:""
+    confirmPassword:"",
+    image:""
   }
 
   const classes = useStyles();
@@ -53,8 +55,16 @@ const Register = (props) => {
     })
   }
 
+  const setImage = (base64) => {
+    setUser({
+      ...user,
+      image:base64[0].data_url
+    })
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log("user: ", user)
     dispatch(register(user, history, "register"))
   }
 
@@ -157,7 +167,7 @@ const Register = (props) => {
             </Grid>
             <Grid item xs={12}>
               <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                <InputLabel htmlFor="confirmPassword" error={errors.confirmPassword? true : false}>Password</InputLabel>
+                <InputLabel htmlFor="confirmPassword" error={errors.confirmPassword? true : false}>Confirm Password</InputLabel>
                 <OutlinedInput
                   id="confirmPassword"
                   type={values.showConfirmPassword ? 'text' : 'password'}
@@ -186,6 +196,53 @@ const Register = (props) => {
                   </FormHelperText>
                 )}
               </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+            <InputLabel>Add An Avatar</InputLabel>
+          <br/>
+              <ImageUploading
+                value={user.image}
+                onChange={setImage}
+                dataURLKey="data_url"
+              >
+              {({
+                imageList,
+                onImageUpload,
+                onImageRemoveAll,
+                onImageUpdate,
+                onImageRemove,
+                isDragging,
+                dragProps
+              }) => (
+          // write your building UI
+              <div className={`register-upload-image ${classes.uploadImageWrapper}`}
+                style={{
+                    backgroundImage: "url(images/icons/upload.png)",
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: "80px",
+                    backgroundPosition: "50% 20px",
+                    backgroundColor: isDragging ? "grey" : null || imageList.length > 0 ? "grey" : null,
+                  }}
+                {...dragProps}
+              >
+                {imageList.length > 0 ? <div className={classes.imageWrapper}>
+                <img src={user.image} alt="" width="100" />
+                <div>
+                  <Button variant="contained" type="button" className={`${classes.imageUploadButton}`}     onClick={() => {
+                  onImageRemove(0)
+                  } 
+            } >Remove</Button>
+            </div>
+          </div> : <Button type="button" variant="contained"
+             className={`${classes.imageUploadButton}`}
+                  onClick={onImageUpload}
+                  {...dragProps}
+                  >
+                  Browse Image
+                </Button> }
+          </div>
+        )}
+      </ImageUploading>
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel

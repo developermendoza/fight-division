@@ -14,6 +14,7 @@ export const login = (user, history, form) => async (dispatch) => {
 
 export const register = (user, history, form) => async (dispatch) => {
   try {
+    console.log("user: action", user)
     const {data} = await api.registerUser(user);
     dispatch({type:AUTH , payload:data})
     history.push("/dashboard")

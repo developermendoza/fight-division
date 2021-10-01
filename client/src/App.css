@@ -58,3 +58,36 @@ a.btn.btn.btn-secondary:hover{
   align-items: center;
   color: white;
 }
+
+.register-upload-image{
+  color: grey;
+  position: relative;
+  background-color:#DCDCDC;
+
+}
+
+/* .register-upload-text {
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  margin-top: -20px;
+  } */
+
+/* .register-upload-text {
+  position: relative;
+  width: 100%;
+} */
+
+.register-upload-image:after {
+  content: "Drag & Drop to Upload Your Image";
+  position: absolute;
+  left: 0;
+  top:90px;
+  /* z-index: -1; */
+  right: 0;
+  bottom: 12px;
+}
+
+.register-upload-image button{
+  font-size: 12px;
+}
