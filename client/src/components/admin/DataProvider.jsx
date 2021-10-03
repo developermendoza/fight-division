@@ -31,6 +31,7 @@ const DataProvider =  {
     getMany: (resource, params) => {
         const query = {
             filter: JSON.stringify({ id: params.ids }),
+            // filter: JSON.stringify({ id: params._ids }),
         };
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
         return httpClient(url).then(({ json }) => ({ data: json }));

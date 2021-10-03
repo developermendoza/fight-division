@@ -5,10 +5,9 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import { Container } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useStyles } from "./styles";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function a11yProps(index) {
   return {
@@ -18,6 +17,8 @@ function a11yProps(index) {
 }
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+
+  console.log("props: ", props)
 
   return (
     <div
@@ -29,7 +30,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>

@@ -66,26 +66,18 @@ a.btn.btn.btn-secondary:hover{
 
 }
 
-/* .register-upload-text {
-  position: absolute;
-  z-index: -1;
-  overflow: hidden;
-  margin-top: -20px;
-  } */
 
-/* .register-upload-text {
-  position: relative;
-  width: 100%;
-} */
-
-.register-upload-image:after {
-  content: "Drag & Drop to Upload Your Image";
-  position: absolute;
+.register-upload-image.addDropHereText:after {
+  content: "Drop Here";
+  position:absolute;
   left: 0;
-  top:90px;
-  /* z-index: -1; */
-  right: 0;
-  bottom: 12px;
+  right:0;
+  font-family:monospace;
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+  z-index: 0;
 }
 
 .register-upload-image button{

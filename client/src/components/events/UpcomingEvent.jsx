@@ -8,7 +8,7 @@ import moment from "moment";
 import MainEventMatch from "../matches/MainEventMatch";
 
 // Random component
-const Completionist = () => <span>You are good to go!</span>;
+const Completionist = () => <span>The event has started</span>;
 
 // Renderer callback with condition
 const renderer = ({ days ,hours, minutes, seconds, completed }) => {

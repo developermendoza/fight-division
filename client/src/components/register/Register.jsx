@@ -198,7 +198,7 @@ const Register = (props) => {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-            <InputLabel>Add An Avatar</InputLabel>
+            <InputLabel>UPLOAD PICTURE: </InputLabel>
           <br/>
               <ImageUploading
                 value={user.image}
@@ -214,19 +214,33 @@ const Register = (props) => {
                 isDragging,
                 dragProps
               }) => (
-          // write your building UI
-              <div className={`register-upload-image ${classes.uploadImageWrapper}`}
+              <div className={`register-upload-image ${classes.uploadImageWrapper} ${isDragging ? " addDropHereText" : null}`}
                 style={{
-                    backgroundImage: "url(images/icons/upload.png)",
+                    backgroundImage: isDragging ? null : "url(images/icons/upload.png)",
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: "80px",
                     backgroundPosition: "50% 20px",
-                    backgroundColor: isDragging ? "grey" : null || imageList.length > 0 ? "grey" : null,
+                    backgroundColor: isDragging ? "#FDF100" : null || imageList.length > 0 ? "grey" : null,
+                    border: imageList.length > 0 ? "6px dotted darkgrey" : null
                   }}
                 {...dragProps}
               >
+               { !isDragging && <p>Drag & Drop to Upload Your Image</p> }
+
                 {imageList.length > 0 ? <div className={classes.imageWrapper}>
-                <img src={user.image} alt="" width="100" />
+                <div className={classes.imageContainer}>
+                  <div style={{
+                    width: "100px",
+                    height: "100px",
+                    backgroundImage: `url(${user.image})`,
+                    borderRadius: "50%",
+                    backgroundPosition:"center",
+                    backgroundRepeat:"no-repeat",
+                    backgroundSize:"100%",
+                    boxShadow: "0 -5px 3px -3px black, 0 5px 3px -3px black",
+                  }}>
+                  </div>
+                </div>
                 <div>
                   <Button variant="contained" type="button" className={`${classes.imageUploadButton}`}     onClick={() => {
                   onImageRemove(0)
@@ -236,6 +250,9 @@ const Register = (props) => {
           </div> : <Button type="button" variant="contained"
              className={`${classes.imageUploadButton}`}
                   onClick={onImageUpload}
+                  style={{
+                    display: isDragging ? "none" : null
+                  }}
                   {...dragProps}
                   >
                   Browse Image

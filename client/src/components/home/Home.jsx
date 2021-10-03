@@ -46,7 +46,7 @@ function Home() {
 
   return (
     <div>
-      <TabNavbar />
+      {/* <TabNavbar /> */}
       <LandingHero />
       <UpcomingEvent upcomingEvent={upcomingEvent} mainEvent={mainEvent} />
       <Matches matches={matches}/>

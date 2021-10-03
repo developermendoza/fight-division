@@ -16,13 +16,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useStyles } from "./styles";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { logout } from "../../utils";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import PropTypes from 'prop-types';
 import { Container } from '@material-ui/core';
 
 
@@ -32,7 +27,6 @@ export default function Navbar() {
   const matches = useMediaQuery('(min-width:600px)');
   const [state, setState] = useState({left: false});
   const [ user, setUser ] = useState(JSON.parse(localStorage.getItem("authorized")));
-  const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
 

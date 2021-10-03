@@ -26,6 +26,16 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     margin: "10px 0"
   },
+  imageContainer:{
+    display:"flex",
+    justifyContent:"center"
+  },
+  userImage:{
+    width: "100px",
+    height: "100px",
+    borderRadius: "50%",
+    boxShadow: "0 0 50px #ccc"
+  },
 
   // imageItemBtnWrapper: {
   //   display: "flex",
@@ -34,14 +44,14 @@ export const useStyles = makeStyles((theme) => ({
   // },
   uploadImageWrapper:{
     // background: "grey",
-    border: "1px dotted grey",
+    border: "6px dotted grey",
     textAlign: "center",
     height: "250px",
     display: "flex",
     flexDirection:"column",
     justifyContent: "center",
     alignItems: "center",
-    transition:"all .2s",
+    transition:"all .4s",
     position:"relative",
   },
   imageUploadButton:{

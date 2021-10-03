@@ -2,7 +2,7 @@ import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, EmailFie
 const UserList = (props) => {
   return (
     <List {...props} perPage={25}>
-      <Datagrid>
+      <Datagrid rowClick="edit">
         <TextField source="id" />
         <EmailField source="email" />
         <TextField source="username" />

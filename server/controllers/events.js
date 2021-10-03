@@ -11,7 +11,6 @@ export const getEvents = async (req, res) => {
     res.status(404).json(error)
   }
 }
-
 export const getUpcomingEvent = async (req, res) => {
   
   try {
@@ -24,8 +23,6 @@ export const getUpcomingEvent = async (req, res) => {
       id: data.id,
       ...data._doc
     }
-
-    console.log("event: ", event)
 
     res.status(200).json(event)
     } catch (error) {

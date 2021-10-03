@@ -22,7 +22,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -51,7 +51,7 @@ function Matches({matches}) {
     setValue(newValue);
   };
 
-
+// console.log("matches: ", matches.id)
   return (
     <Container>
       <Paper className="paper">
@@ -65,9 +65,8 @@ function Matches({matches}) {
               <Tab label="Early Prelims" {...a11yProps(3)} />
             </Tabs>
           </Box>
-          <TabPanel value={value} index={0}>
-            {matches ? matches.map( match =>
-              <Grid container key={match.id}>
+          <TabPanel  value={value} index={0}>
+            {matches ? matches.map( match => <Grid container key={match.matchOrder}>
                 <Grid item  xs={12} md={6}>
                   <Paper elevation={3} style={{justifyContent:"space-between", alignItems:"center"}} className={`${classes.match} ${classes.fighter1}`}>
                   <div style={{display:"flex"}}>
@@ -84,7 +83,7 @@ function Matches({matches}) {
                   <Paper style={{alignItems:"center", justifyContent:"space-between",flexDirection: queryMatches ? "row" : "row-reverse", textAlign: queryMatches ? "right" : "left" }} className={`${classes.match}`}>
                   <p className={classes.odds}>{match.fighter2_odds}</p>
                   <div style={{display:"flex", flexDirection: queryMatches ?"row":"row-reverse"}}>
-                  <div className={`${classes.fighterInfo} ${classes.fighter2Info}`}>
+                    <div className={`${classes.fighterInfo} ${classes.fighter2Info}`}>
                       <p>{match.fighter2.firstname} {match.fighter2.nickname ? `"${match.fighter2.nickname}"` : ""}  {match.fighter2.lastname}</p>
                       <p className={classes.fighterRecord}>{match.fighter2.wins}-{match.fighter2.losses}-{match.fighter2.draws}</p>
                     </div>
@@ -96,7 +95,7 @@ function Matches({matches}) {
           </TabPanel>
           <TabPanel value={value} index={1}>
               {matches ? matches.map( match =>
-                match.isMainCardFight && <Grid container key={match.id}>
+                match.isMainCardFight && <Grid container key={match.matchOrder}>
                 <Grid item  xs={12} md={6} >
                 <Paper elevation={3} style={{justifyContent:"space-between", alignItems:"center"}} className={`${classes.match} ${classes.fighter1}`}>
                   <div style={{display:"flex"}}>
@@ -125,7 +124,7 @@ function Matches({matches}) {
           </TabPanel>
           <TabPanel value={value} index={2}>
               {matches ? matches.map( match => match.isPrelimFight &&
-                  <Grid container key={match.id}>
+                  <Grid container key={match.matchOrder}>
                 <Grid item xs={12} md={6} >
                 <Paper elevation={3} style={{justifyContent:"space-between", alignItems:"center"}} className={`${classes.match} ${classes.fighter1}`}>
                   <div style={{display:"flex"}}>
@@ -154,7 +153,7 @@ function Matches({matches}) {
           </TabPanel>
           <TabPanel value={value} index={3}>
             {matches ? matches.map( match => match.isEarlyPrilimFight &&
-              <Grid container key={match.id}>
+              <Grid container key={match.matchOrder}>
                 <Grid item xs={12} md={6} >
                 <Paper elevation={3} style={{justifyContent:"space-between", alignItems:"center"}} className={`${classes.match} ${classes.fighter1}`}>
                   <div style={{display:"flex"}}>
