@@ -1,4 +1,4 @@
-import {Create, SimpleForm, TextInput, PasswordInput} from "react-admin"
+import {Create, SimpleForm, TextInput, PasswordInput, NumberField, NumberInput} from "react-admin"
 const UserCreate = (props) => {
   return (
     <Create title="Add a User" {...props}>

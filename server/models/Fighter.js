@@ -21,9 +21,9 @@ const fighterSchema = mongoose.Schema({
     type: Number,
     default: null
   },
-  weight:{
+  weight: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Weight"
+    ref:"Weight"
   },
   isChampion:{
     type: Boolean,
@@ -46,6 +46,14 @@ const fighterSchema = mongoose.Schema({
     default: null
   },
   image:{
+    type: String,
+    default: null
+  },
+  imageLeft:{
+    type: String,
+    default: null
+  },
+  imageRight:{
     type: String,
     default: null
   },

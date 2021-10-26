@@ -7,9 +7,9 @@ import { validateNewUser, validateUser } from "../validations/validation.js";
 
 export const getUsers = async (req, res) => {
   try {
+
     const users = await User.find();
-    res.header('Access-Control-Expose-Headers', 'Content-Range')
-    res.header('Content-Range','bytes : 0-9/*')
+
     res.status(200).json(users)
   } catch (error) {
     res.status(404).json(error)

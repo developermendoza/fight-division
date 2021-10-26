@@ -1,7 +1,7 @@
 import Network from "../models/Network.js";
-import mongoose from "mongoose";
 export const getNetworks = async (req, res) => {
   try {
+
     const networks = await Network.find();
     res.status(200).json(networks)
   } catch (error) {

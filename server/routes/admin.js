@@ -1,26 +1,44 @@
 import express from "express";
-import { getUsers, addUser, deleteUser, getUser, updateUser, getEvents, getNetworks } from "../controllers/admin.js";
-// import  UserControls  from "../controllers/admin.js";
+
+import { getUsers, addUser, deleteUser, getUser, updateUser } from "../controllers/admin/users.js";
+import { getNetworks, getNetwork} from "../controllers/admin/networks.js";
+import { getEvents, addEvent, deleteEvent, updateEvent } from "../controllers/admin/events.js";
+import { getMatches, deleteMatch, addMatch, updateMatch } from "../controllers/admin/matches.js";
+import { getFighters, addFighter, updateFighter } from "../controllers/admin/fighters.js";
+import { getOrganizations } from "../controllers/admin/organizations.js";
+import { getWeights } from "../controllers/admin/weights.js";
+import { addPicks } from "../controllers/admin/picks.js";
 
 const router = express.Router();
 
-router.get("/users", getUsers);
-router.get("/users/:id", getUser);
-router.post("/users", addUser);
-router.patch("/users/:id", updateUser)
-router.delete("/users/:id", deleteUser)
+router.get("/users", getUsers);  // getList - works fine
+router.get("/users/:id", getUser); // getOne
+router.patch("/users/", updateUser) //update - not working properly
+router.post("/users", addUser); // create - works but jumps to update after adding new user
+router.delete("/users/:id", deleteUser) //delete - works fine
 
-router.get("/events", getEvents);
+router.get("/events", getEvents); // getList - works fine
+router.post("/events", addEvent);
+router.delete("/events/:id", deleteEvent);
+router.patch("/events/", updateEvent) 
 
-router.get("/networks", getNetworks);
+router.get("/networks", getNetworks); // getList - works fine
+router.get("/networks/:id", getNetwork); 
 
-// let UserController = {
-//   find: async (req,res) => {
+router.get("/matches", getMatches); 
+router.delete("/matches/:id", deleteMatch); 
+router.post("/matches", addMatch); 
+router.patch("/matches", updateMatch); 
 
-//   }
-// }
-// router.get("/users", UserControls.all)
-// router.post("/users/create", UserControls.create)
-// router.get("/users/:id", UserControls.find)
+router.get("/fighters", getFighters); 
+router.post("/fighters", addFighter); 
+router.patch("/fighters", updateFighter); 
+
+router.get("/organizations", getOrganizations); 
+
+router.get("/weights", getWeights);
+
+router.post("/picks", addPicks);
+
 
 export default router;

@@ -10,26 +10,15 @@ const EventList = (props) => {
         <DateField source="mainCardTime" />
         <DateField source="prelimTime" />
         <DateField source="earlyPrelimTime" />
+        {/* <ReferenceField source="mainCardNetwork" reference="networks">
+          <TextField source="name" />
+        </ReferenceField> */}
+        <TextField source="mainCardNetwork.name" label="Maincard Network" />
+        <TextField source="prelimNetwork.name" label="Prelim Network" />
+        <TextField source="earlyPrelimNetwork.name" label="Early Prelim Network" />
+        <TextField source="organization.name" label="Organization" />
         <DateField source="createdAt" />
         <TextField source="updatedAt" />
-        <TextField source="mainCardNetwork.name" />
-        <TextField source="earlyPrelimNetwork.name" />
-        <TextField source="prelimNetwork.name" />
-        {/* <ReferenceField source="_id" reference="networks"><TextField source="name" /></ReferenceField> */}
-        {/* <TextField source="name" />
-        <TextField source="location" />
-        <TextField source="venue" />
-        <DateField source="date" />
-        <DateField source="mainCardTime" />
-        <DateField source="prelimTime" />
-        <DateField source="earlyPrelimTime" />
-        <DateField source="createdAt" />
-        <TextField source="updatedAt" />
-        <ReferenceField source="earlyPrelimNetwork" reference="networks"><TextField source="earlyPrelimNetwork.name" /></ReferenceField>
-        <ReferenceField source="mainCardNetwork" reference="networks"><TextField source="id" /></ReferenceField>
-        <TextField source="organization" />
-        <ReferenceField source="prelimNetwork" reference="networks"><TextField source="id" /></ReferenceField>
-        <TextField source="id" /> */}
       </Datagrid>
     </List>
   )

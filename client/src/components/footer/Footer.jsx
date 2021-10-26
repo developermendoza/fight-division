@@ -1,14 +1,20 @@
 import { Container, Grid } from '@material-ui/core'
 import React from 'react'
 import { useStyles } from './styles';
+import { Link, useHistory, useLocation,useParams } from "react-router-dom";
 
 function Footer() {
   const classes = useStyles();
+  const location = useLocation();
+
+  if (location.pathname === "/admin" || location.pathname === `/admin/events` || location.pathname === `/admin/fighters` || location.pathname === `/admin/matches`) return null
+
+
   return (
     <>
     <footer className={`section ${classes.footer}`}>
       <Container>
-        <Grid container space={2} justifyContent="space-between">
+        <Grid container space={2} justify="space-between">
           <Grid className={classes.footerSection} item xs={12} md={3}>
             <h4 className={classes.title}>Underground Fighter</h4>
             <p className={classes.description}> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>

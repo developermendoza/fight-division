@@ -16,7 +16,6 @@ const DataProvider =  {
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
         return httpClient(url).then(({ headers, json }) => ({
-            // data: json,
             data: json.map(resource => ({ ...resource, id: resource._id }) ),
             total: parseInt(headers.get('content-range').split('/').pop(), 10),
         }));
@@ -24,17 +23,16 @@ const DataProvider =  {
 
     getOne: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-          // data: {...json, id:json._id},
-          data: {...json, id: json._id},
+          data:{...json, id: json._id}
         })),
-
     getMany: (resource, params) => {
-        const query = {
-            filter: JSON.stringify({ id: params.ids }),
-            // filter: JSON.stringify({ id: params._ids }),
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        return httpClient(url).then(({ json }) => ({ data: json }));
+      const query = {
+          filter: JSON.stringify({ id: params.ids }),
+      };
+      const url = `${apiUrl}/${resource}?${stringify(query)}`;
+      return httpClient(url).then(({ json }) => ({
+        data: json.map(resource => ({ ...resource, id: resource._id }) ),
+      }));
     },
 
     getManyReference: (resource, params) => {
@@ -59,10 +57,8 @@ const DataProvider =  {
     update: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'PUT',
-            body: JSON.stringify(params.data),
-        }).then(({ json }) => ({
-         data: {...json, id:json._id}
-        })),
+            body: JSON.stringify(params.data)
+        }).then(({ json }) => ({ ...json, id: json._id })),
 
     updateMany: (resource, params) => {
         const query = {
@@ -79,14 +75,14 @@ const DataProvider =  {
             method: 'POST',
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
-            data: { ...params.data, id: json._id }
+            data: { ...params.data, id: json._id },
         })),
 
     delete: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'DELETE',
         }).then(({ json }) => (
-        {  data: json }
+          {data: { ...json, id: json._id }}
         )),
 
     deleteMany: (resource, params) => {

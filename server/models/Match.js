@@ -48,10 +48,10 @@ const matchSchema = mongoose.Schema({
   },
   result:{
     type: Object,
+    default: null,
     winner:{
       type: mongoose.Schema.Types.ObjectId,
       ref:"Fighter",
-      default: null
     },
     loser:{
       type: mongoose.Schema.Types.ObjectId,

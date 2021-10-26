@@ -26,10 +26,12 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     margin: "10px 0"
   },
+  
   imageContainer:{
     display:"flex",
     justifyContent:"center"
   },
+
   userImage:{
     width: "100px",
     height: "100px",
@@ -37,27 +39,21 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: "0 0 50px #ccc"
   },
 
-  // imageItemBtnWrapper: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   marginLeft: "10px",
-  // },
   uploadImageWrapper:{
-    // background: "grey",
     border: "6px dotted grey",
     textAlign: "center",
     height: "250px",
     display: "flex",
     flexDirection:"column",
-    justifyContent: "center",
+    justifycontent: "center",
     alignItems: "center",
     transition:"all .4s",
     position:"relative",
   },
+
   imageUploadButton:{
     marginTop: "20px",
     zIndex:"3"
-  //  marginBottom: "-60px"
   },
 
   imageWrapper:{
@@ -67,8 +63,5 @@ export const useStyles = makeStyles((theme) => ({
     right:"0",
     top: "20%",
     zIndex:"2"
-    // display: "flex",
-    // alignItems: "center",
-    // justifyContent: "center"
   }
 }));

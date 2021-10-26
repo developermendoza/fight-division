@@ -89,6 +89,7 @@ const Register = (props) => {
     };
   }, [props.errors,dispatch])
 
+  // console.log("props: ",props)
   return (
     
     <Container component="main" maxWidth="xs">
@@ -217,6 +218,8 @@ const Register = (props) => {
               <div className={`register-upload-image ${classes.uploadImageWrapper} ${isDragging ? " addDropHereText" : null}`}
                 style={{
                     backgroundImage: isDragging ? null : "url(images/icons/upload.png)",
+                    display: "flex",
+                    justifyContent:"center",
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: "80px",
                     backgroundPosition: "50% 20px",
@@ -233,11 +236,9 @@ const Register = (props) => {
                     width: "100px",
                     height: "100px",
                     backgroundImage: `url(${user.image})`,
-                    borderRadius: "50%",
                     backgroundPosition:"center",
                     backgroundRepeat:"no-repeat",
                     backgroundSize:"100%",
-                    boxShadow: "0 -5px 3px -3px black, 0 5px 3px -3px black",
                   }}>
                   </div>
                 </div>
@@ -277,7 +278,7 @@ const Register = (props) => {
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container justifycontent="flex-end">
             <Grid item>
               <Link to="/login" variant="body2">
                 Already have an account? Sign in

@@ -12,15 +12,16 @@ import Leaderboard from "../leaderboard/Leaderboard";
 
 function Home() {
   const dispatch = useDispatch();
-  const upcomingEvent = useSelector(state => state.events.data)
-  const matches = useSelector(state => state.matches.data);
+  const upcomingEvent = useSelector(state => state.events)
+  const matches = useSelector(state => state.matches);
   const toptenUsers = useSelector(state => state.users.data);
-  const [ mainEvent, setMainEvent ] = useState()
+  const [ mainEvent, setMainEvent ] = useState({})
+  const [event, setEvent ] = useState({});
 
   const getMainEvent = (matches) => {
 
     if(matches && matches.length > 0){
-      const mainEvent = matches.find( match => match.isMainEvent === true );
+      const mainEvent = matches.find( match => match.isMainEvent === true ? match : null );
      return mainEvent
     }
   }
@@ -31,24 +32,27 @@ function Home() {
   }, [dispatch])
 
   useEffect(() => {
-    if(upcomingEvent){
-      dispatch(getMatchesByEventId(upcomingEvent.id))
+    if(upcomingEvent.data){
+      dispatch(getMatchesByEventId(upcomingEvent.data.id))
+      setEvent(upcomingEvent.data)
     }
-
   },[dispatch, upcomingEvent])
 
   useEffect(() => {
-    if(matches){
-      const mainEvent = getMainEvent(matches)
+    if(matches.data){
+      const mainEvent =  getMainEvent(matches.data)
       setMainEvent(mainEvent)
     }
   }, [matches])
-
+  // console.log("mainEvent: ", mainEvent)
   return (
     <div>
-      {/* <TabNavbar /> */}
-      <LandingHero />
-      <UpcomingEvent upcomingEvent={upcomingEvent} mainEvent={mainEvent} />
+      <LandingHero mainEvent={mainEvent}/>
+      <UpcomingEvent 
+      upcomingEventLoading={upcomingEvent.fetchInProgress} upcomingEvent={event} 
+      mainEvent={mainEvent}
+      mainEventLoading={matches.fetchInProgress}
+       />
       <Matches matches={matches}/>
       <Banner />
       <Leaderboard toptenUsers={toptenUsers} />

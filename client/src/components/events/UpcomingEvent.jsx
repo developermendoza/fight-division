@@ -5,65 +5,70 @@ import { useStyles } from './styles';
 import Paper from '@material-ui/core/Paper';
 import Countdown from "react-countdown";
 import moment from "moment";
+import {Typography} from '@material-ui/core';
+import {Skeleton} from '@material-ui/lab';
+// import { makeStyles } from '@material-ui/core/styles';
+
+
 import MainEventMatch from "../matches/MainEventMatch";
 
+function UpcomingEvent({upcomingEvent, upcomingEventLoading, mainEvent, mainEventLoading}) {
+const classes = useStyles();
+
+
 // Random component
-const Completionist = () => <span>The event has started</span>;
+const Completionist = () => <span>Event is in progress</span>;
 
 // Renderer callback with condition
-const renderer = ({ days ,hours, minutes, seconds, completed }) => {
+const renderer = ({days, hours, minutes, seconds, completed }) => {
+
   if (completed) {
     // Render a completed state
     return <Completionist />;
   } else {
     // Render a countdown
-    return <span>{days}:{hours}:{minutes}:{seconds}</span>;
+    return <div>
+    <Grid container spacing={1} className="primary-text-color" style={{fontSize:"2.5rem"}}>
+        <Grid item>{days}</Grid>
+        <Grid item>:</Grid>
+        <Grid item>{hours}</Grid>
+        <Grid item>:</Grid>
+        <Grid item>{minutes}</Grid>
+        <Grid item>:</Grid>
+        <Grid item>{seconds}</Grid>
+    </Grid>
+    <Grid container spacing={1} style={{fontSize:"1rem"}}>
+        <Grid item>DAYS</Grid>
+        <Grid item>:</Grid>
+        <Grid item>HRS</Grid>
+        <Grid item>:</Grid>
+        <Grid item>MINS</Grid>
+        <Grid item>:</Grid>
+        <Grid item>SECS</Grid>
+    </Grid>
+    </div>;
   }
 };
-
-function UpcomingEvent({upcomingEvent, mainEvent}) {
-const [ event, setEvent ] = useState();
-const [ match, setMatch ] = useState();
-const classes = useStyles();
-
-
-
-
-useEffect(() => {
-  if(upcomingEvent){
-    setEvent(upcomingEvent)
-  }
-
-  if(mainEvent){
-    setMatch(mainEvent)
-  }
-},[upcomingEvent, mainEvent, match]);
-
-const eventDate = (event) => {
-  if(event.earlyPrelimTime){
-    return event.earlyPrelimTime
-  }else if(!event.earlyPrelimTime && event.prelimTime){
-    return event.prelimTime
-  }else{
-    return event.mainCardTime;
-  }
-}
 
   return (
     <Container>
       <Paper className="paper" >
       <Grid container spacing={2} className="section">
           <Grid item  md={3}>
-            <h2 className={`${classes.eventTitle} primary-text-color`}>{event? event.name.toUpperCase(): <>No event</>}</h2>
-            <p className={classes.subText}>{ event? moment(event.date).format('dddd, MMMM DD YYYY') : <>No Event Date</>}</p>
+          <Typography variant="h2" style={{textTransform:"uppercase"}} className={`${classes.eventTitle} primary-text-color`}>
+            {upcomingEventLoading ? <Skeleton style={{background:"grey"}} /> : upcomingEvent.name}
+          </Typography>
+          <Typography variant="p" className={classes.subText}>
+            {upcomingEventLoading ? <Skeleton style={{background:"grey"}} /> : moment(upcomingEvent.date).format('dddd, MMMM DD YYYY') }
+          </Typography>
           </Grid>
-          {match ? <MainEventMatch match={match} />  : <>Loading...</>}
+         <MainEventMatch mainEvent={mainEvent} upcomingEvent={upcomingEvent} upcomingEventLoading={upcomingEventLoading} mainEventLoading={mainEventLoading}/>
         <Grid item  md={3}>
           <h2 className={classes.eventCounterText}>COUNTDOWN</h2>
-            <div> {event ?<><p className={`${classes.eventCounter} primary-text-color`}>{<Countdown
-            date={eventDate(event)}
-            renderer={renderer}
-          />}</p><p className={classes.subText}>DAYS | HRS | MINS | SECS</p></> :<><p className={`${classes.eventCounter} primary-text-color`}>&#8734; : &#8734; : &#8734; : &#8734;</p><p className={classes.subText}>DAYS | HRS | MINS | SECS</p></>}</div>
+          {!upcomingEvent.date ? <Skeleton style={{background:"grey"}} /> : <Countdown
+          date={upcomingEvent.earlyPrelimTime || upcomingEvent.prelimTime || upcomingEvent.mainCardTime || upcomingEvent.date} 
+          renderer={renderer}
+          /> }
         </Grid>
         </Grid>
       </Paper>

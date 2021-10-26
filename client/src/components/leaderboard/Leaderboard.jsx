@@ -8,7 +8,7 @@ function Leaderboard({toptenUsers}) {
   return (
     <Container>
       <Paper className="paper">
-        <Grid container spacing={2} className={`section ${classes.section}`} justifyContent="space-between">
+        <Grid container spacing={2} className={`section ${classes.section}`} justify="space-between">
           <Grid item>
             <h2 className={`primary-text-color ${classes.title}`}>LEADERBOARD</h2>
           </Grid>
@@ -22,7 +22,7 @@ function Leaderboard({toptenUsers}) {
         <Grid container spacing={2} className="section">
           <Grid item xs={12} md={6}>
           {toptenUsers ? toptenUsers.slice(0, 5).map( (user, i) => <Paper key={user._id} elevation={3} className={classes.user}>
-              <Grid container  alignItems="center" justifyContent="space-between">
+              <Grid container  alignItems="center" justify="space-between">
                 <Grid item md={6} className={classes.userName}>
                   <p className={user.userRank}>{++i}</p>
                   <Avatar variant="circular" className={classes.userImage} src={user?.image}/>
@@ -36,7 +36,7 @@ function Leaderboard({toptenUsers}) {
           </Grid>
           <Grid item xs={12} md={6}>
           {toptenUsers ? toptenUsers.slice(5, 10).map( (user, j) => <Paper key={user._id} elevation={3} className={classes.user}>
-              <Grid container  alignItems="center" justifyContent="space-between">
+              <Grid container  alignItems="center" justify="space-between">
                 <Grid item md={6} className={classes.userName}>
                   <p className={user.userRank}>{j + 6}</p>
                   <Avatar variant="circular" className={classes.userImage} src={user?.image}/>
