@@ -50,19 +50,17 @@ function Matches({matches}) {
   const queryMatches = useMediaQuery('(min-width:960px)');
   const [ allMatches, setAllMatches ] = useState()
   const handleChange = (event,newValue) => {
-    console.log("event: ", event)
-    console.log("newValue: ", newValue)
     setValue(newValue);
   };
 
 
   useEffect(() => {
     if(matches.data){
-      setAllMatches(matches.data)
+      const sorted = matches.data.sort(function(a, b){return a.matchOrder - b.matchOrder});
+      setAllMatches(sorted)
     }
   }, [matches])
 
-console.log("matches: ", matches)
   return (
     <Container>
       <Paper className="paper">
@@ -80,8 +78,7 @@ console.log("matches: ", matches)
           {/* <Grid container spacing={2}>  */}
           {matches.fetchInProgress ? <Grid container  spacing={2}> {[1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(grid => (
             <Grid item  xs={12} md={6} >
-          <Skeleton style={{background:"grey"}} height="100px" /> 
-          
+          <Skeleton style={{background:"grey"}} height="100px" />
           </Grid> ))}</Grid>  : allMatches?.map( match => 
             <Grid container key={match.matchOrder}>
                 <Grid item  xs={12} md={6}>
@@ -206,7 +203,7 @@ console.log("matches: ", matches)
                   <Avatar variant="circular" className={classes.fighter} src={match.fighter1.image} />
                     <div className={`${classes.fighterInfo} ${classes.fighter1Info}`}>
                       <p>{match.fighter1.firstname} {match.fighter1.nickname ? `"${match.fighter1.nickname}"` : ""}  {match.fighter1.lastname}</p>
-                      <p className={classes.fighterRecord}>{match.fighter1.firstname} {match.fighter1.nickname ? `"${match.fighter1.nickname}"` : ""} {match.fighter1.lastname}</p>
+                      <p className={classes.fighterRecord}>{match.fighter1.wins}-{match.fighter1.losses}-{match.fighter1.draws}</p>
                     </div>
                   </div>
                     <p className={classes.odds}>{match.fighter1_odds}</p>

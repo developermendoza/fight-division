@@ -28,7 +28,7 @@ const renderer = ({days, hours, minutes, seconds, completed }) => {
   } else {
     // Render a countdown
     return <div>
-    <Grid container spacing={1} className="primary-text-color" style={{fontSize:"2.5rem"}}>
+    <Grid container spacing={1} className="primary-text-color" style={{fontSize:"3.8rem"}}>
         <Grid item>{days}</Grid>
         <Grid item>:</Grid>
         <Grid item>{hours}</Grid>
@@ -37,7 +37,7 @@ const renderer = ({days, hours, minutes, seconds, completed }) => {
         <Grid item>:</Grid>
         <Grid item>{seconds}</Grid>
     </Grid>
-    <Grid container spacing={1} style={{fontSize:"1rem"}}>
+    <Grid container spacing={1} style={{fontSize:"1.8rem"}}>
         <Grid item>DAYS</Grid>
         <Grid item>:</Grid>
         <Grid item>HRS</Grid>

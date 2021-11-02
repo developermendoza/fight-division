@@ -13,8 +13,6 @@ function LandingHero({mainEvent}) {
       
         <Container>
         <Container maxWidth="lg" style={{top:"0",left:"0",zIndex:"-1" ,right:"0", display:"flex", position:"absolute", justifyContent:"center", textAlign:"center", margin:"auto"}}>
-        {/* <img src={mainEvent?.fighter1?.imageLeft} style={{width:"100%", filter: "contrast(120%)"}} alt="" />
-        <img src={mainEvent?.fighter2?.imageRight} style={{width:"100%", filter: "contrast(120%)"}} alt="" /> */}
         </Container>
 
         <div className={classes.heroText} style={{width: matches  ? "40%" : "100%"}}>
