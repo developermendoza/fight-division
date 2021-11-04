@@ -15,12 +15,52 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useStyles } from "./styles";
+import { withStyles } from '@material-ui/core/styles';
+
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { logout } from "../../utils";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Container } from '@material-ui/core';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import SendIcon from '@material-ui/icons/Send';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import HomeIcon from '@material-ui/icons/Home';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
 
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+}))(MenuItem);
 
 export default function Navbar() {
   const classes = useStyles();
@@ -29,6 +69,17 @@ export default function Navbar() {
   const [ user, setUser ] = useState(JSON.parse(localStorage.getItem("authorized")));
   const history = useHistory();
   const location = useLocation();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
 
 
@@ -80,7 +131,7 @@ export default function Navbar() {
     </div>
   );
 
-if (location.pathname === "/admin" || location.pathname === `/admin/events` || location.pathname === `/admin/fighters` || location.pathname === `/admin/matches`) return null
+// if (location.pathname === "/admin" || location.pathname === `/admin/events` || location.pathname === `/admin/fighters` || location.pathname === `/admin/matches`) return null
   return (
     // <div className={classes.root} style={{paddingTop: !matches? "26px" : "108px"}}>
     <div className={classes.root}>
@@ -100,11 +151,62 @@ if (location.pathname === "/admin" || location.pathname === `/admin/events` || l
             {list("left")}
           </SwipeableDrawer>
         </> }
-          <Typography component={Link} to="/" variant="h6" color="inherit" style={{textAlign: !matches? "right" : "left" }} className={`${classes.title} logo`}>
-            Underground <span className="primary-text-color">Fighter</span>
+          <Typography component={Link} to="/" variant="h4" color="inherit" style={{textAlign: !matches? "right" : "left" }} className={`${classes.title} logo`}>
+            FIGHTER DIVISION
           </Typography>
           {matches && <>
-            {user ? <Button  onClick={handleLogout} color="inherit">Logout</Button> : <>
+            {/* {user ? <Button  onClick={handleLogout} color="inherit">Logout</Button>  */}
+            {user ?  <div>
+      {/* <Button
+        aria-controls="customized-menu"
+        aria-haspopup="true"
+        variant="contained"
+        color="primary"
+        onClick={handleClick}
+      >
+        Open Menu
+        
+      </Button> */}
+      <AccountCircleIcon style={{cursor:"pointer"}} fontSize="large" onClick={handleClick}/>
+      <StyledMenu
+        id="customized-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+      <a href="/">
+        <StyledMenuItem>
+          <ListItemIcon>
+          <HomeIcon fontSize="large" />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </StyledMenuItem>
+      </a>
+      <a href="/dashboard">
+        <StyledMenuItem>
+          <ListItemIcon>
+            <DashboardIcon fontSize="large" />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </StyledMenuItem>
+      </a>
+      <a href="/picks">
+        <StyledMenuItem>
+          <ListItemIcon>
+          <SportsKabaddiIcon fontSize="large" />
+          </ListItemIcon>
+          <ListItemText primary="Picks" />
+        </StyledMenuItem>
+      </a>
+        <StyledMenuItem onClick={handleLogout}>
+          <ListItemIcon>
+            <ExitToAppIcon fontSize="large" />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </StyledMenuItem>
+      </StyledMenu>
+    </div> : <>
             <Button component={Link} to="/login" color="inherit" className="btn">Login</Button>
           <Button component={Link} to="/register" color="inherit" className="btn btn-primary">Signup</Button>
           </>}
