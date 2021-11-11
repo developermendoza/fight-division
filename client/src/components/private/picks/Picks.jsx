@@ -347,7 +347,7 @@ const fighter2Odds = matchesQuery ? {top: "auto", right: "auto", left:"10px", bo
        </button>
       <div style={{margin:"0 20px", fontSize:"10px", padding:"10px 0", fontWeight:"bold", color:"grey", visibility:showMatchesPicked}}>
       
-      <Grid container style={{display:"flex" ,justifyContent:"space-between", backgroundColor:"#111111", padding:"10px"}}>
+      <Grid container style={{display:"flex" ,justifyContent:"space-between", backgroundColor:"#111111", padding:"10px", alignItems:"center"}}>
       <Grid item xs={4}>
         <p>FIGHTER PICKED</p>
       </Grid>
@@ -360,7 +360,7 @@ const fighter2Odds = matchesQuery ? {top: "auto", right: "auto", left:"10px", bo
       </Grid>
       <br/>
        <div style={{display:showMatchesPickedContent}}>
-       {pickedMatches.map( picked => <Grid container style={{display:"flex",marginBottom:"3px" ,justifyContent:"space-between", background:"darkgrey", color:"black", padding:"5px"}}>
+       {pickedMatches.map( picked => <Grid container style={{display:"flex",marginBottom:"3px" ,justifyContent:"space-between", alignItems:"center" ,background:"darkgrey", color:"black", padding:"5px"}}>
         <Grid item xs={4}>
           <p>{picked.fighterName}</p>
         </Grid>

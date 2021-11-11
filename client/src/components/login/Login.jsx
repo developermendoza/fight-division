@@ -79,14 +79,13 @@ const Login = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} square style={{maxWidth:"400px"}}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
@@ -144,7 +143,7 @@ const Login = (props) => {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+             Login
             </Button>
             <Grid container>
               <Grid item xs>

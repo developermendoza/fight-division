@@ -152,7 +152,7 @@ export default function Navbar() {
           </SwipeableDrawer>
         </> }
           <Typography component={Link} to="/" variant="h4" color="inherit" style={{textAlign: !matches? "right" : "left" }} className={`${classes.title} logo`}>
-            FIGHTER DIVISION
+            FIGHT DIVISION
           </Typography>
           {matches && <>
             {/* {user ? <Button  onClick={handleLogout} color="inherit">Logout</Button>  */}
