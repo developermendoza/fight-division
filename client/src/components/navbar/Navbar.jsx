@@ -20,7 +20,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { logout } from "../../utils";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { Container } from '@material-ui/core';
+import { Avatar, Container } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import SendIcon from '@material-ui/icons/Send';
@@ -132,9 +132,7 @@ export default function Navbar() {
     </div>
   );
 
-// if (location.pathname === "/admin" || location.pathname === `/admin/events` || location.pathname === `/admin/fighters` || location.pathname === `/admin/matches`) return null
   return (
-    // <div className={classes.root} style={{paddingTop: !matches? "26px" : "108px"}}>
     <div className={classes.root}>
       <AppBar  className={classes.topNavbar}>
       <Container>
@@ -152,26 +150,12 @@ export default function Navbar() {
             {list("left")}
           </SwipeableDrawer>
         </> }
-          {/* <Typography component={Link} to="/" variant="h4" color="inherit" style={{textAlign: !matches? "right" : "left" }} className={`${classes.title} logo`}>
-            FIGHT <span>DIVISION</span>
-          </Typography> */}
           <a href="/" className="logo" style={{textAlign:"center", display:"flex", alignItems:"center"}}>
             <img style={{width:"100%", height:"40px", marginRight:"5px"}} src="./images/logo-icon.png" alt="" />
           </a>
           {matches && <>
-            {/* {user ? <Button  onClick={handleLogout} color="inherit">Logout</Button>  */}
             {user ?  <div>
-      {/* <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        Open Menu
-        
-      </Button> */}
-      <AccountCircleIcon style={{cursor:"pointer"}} fontSize="large" onClick={handleClick}/>
+      <Avatar src={user.result.image} style={{cursor:"pointer", width:"30px", height:"30px"}} onClick={handleClick}/>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -182,7 +166,7 @@ export default function Navbar() {
       <a href="/">
         <StyledMenuItem>
           <ListItemIcon>
-          <HomeIcon fontSize="large" />
+          <HomeIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </StyledMenuItem>
@@ -190,7 +174,7 @@ export default function Navbar() {
       <a href="/dashboard">
         <StyledMenuItem>
           <ListItemIcon>
-            <DashboardIcon fontSize="large" />
+            <DashboardIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </StyledMenuItem>
@@ -198,14 +182,14 @@ export default function Navbar() {
       <a href="/picks">
         <StyledMenuItem>
           <ListItemIcon>
-          <SportsKabaddiIcon fontSize="large" />
+          <SportsKabaddiIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Picks" />
         </StyledMenuItem>
       </a>
         <StyledMenuItem onClick={handleLogout}>
           <ListItemIcon>
-            <ExitToAppIcon fontSize="large" />
+            <ExitToAppIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </StyledMenuItem>
