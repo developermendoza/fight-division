@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     color:"white",
   },
   image: {
-    backgroundImage: 'url(images/hero/landing-hero.jpg)',
+    backgroundImage: 'url(images/hero/hero.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',

@@ -2,26 +2,44 @@ import { useStyles } from './styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Container, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-function LandingHero({mainEvent}) {
-  const matches = useMediaQuery('(min-width:600px)');
+import Fade from '@material-ui/core/Fade';
+import Slide from '@material-ui/core/Slide';
+import Zoom from '@material-ui/core/Zoom';
+import Grow from '@material-ui/core/Grow';
+import React, {useState, useEffect} from "react";
 
+function HeroText(props){
   const classes = useStyles();
+  const matches = useMediaQuery('(min-width:600px)');
   return (
-    <div className={classes.root}>
-    
-      <div className={classes.image}>
-      
-        <Container>
-        <Container maxWidth="lg" style={{top:"0",left:"0",zIndex:"-1" ,right:"0", display:"flex", position:"absolute", justifyContent:"center", textAlign:"center", margin:"auto"}}>
-        </Container>
-
-        <div className={classes.heroText} style={{width: matches  ? "40%" : "100%"}}>
+    <div {...props}>
+      <div className={classes.heroText} style={{width: matches  ? "40%" : "100%"}}>
           <h3 className="primary-text-color">LOREM IPSUM</h3>
           <h1>Fight Division</h1>
           <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
         </div>
         <br />
         <Button component={Link} to="/register" className="btn btn-secondary">Signup</Button>
+    </div>
+  )
+}
+function LandingHero({mainEvent}) {
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    setChecked(true)
+  }, [])
+
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      <div className={classes.image}>
+        <Container>
+        <Container maxWidth="lg" style={{top:"0",left:"0",zIndex:"-1" ,right:"0", display:"flex", position:"absolute", justifyContent:"center", textAlign:"center", margin:"auto"}}>
+        </Container>
+        <Grow direction="left" in={checked} mountOnEnter unmountOnExit>
+        <HeroText/>
+        </Grow>
         </Container>
       </div>
     </div>

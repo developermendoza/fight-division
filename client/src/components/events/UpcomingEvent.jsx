@@ -27,26 +27,23 @@ const renderer = ({days, hours, minutes, seconds, completed }) => {
     return <Completionist />;
   } else {
     // Render a countdown
-    return <div>
-    <Grid container spacing={1} className="primary-text-color" style={{fontSize:"3.8rem"}}>
-        <Grid item>{days}</Grid>
-        <Grid item>:</Grid>
-        <Grid item>{hours}</Grid>
-        <Grid item>:</Grid>
-        <Grid item>{minutes}</Grid>
-        <Grid item>:</Grid>
-        <Grid item>{seconds}</Grid>
-    </Grid>
-    <Grid container spacing={1} style={{fontSize:"1.8rem"}}>
-        <Grid item>DAYS</Grid>
-        <Grid item>:</Grid>
-        <Grid item>HRS</Grid>
-        <Grid item>:</Grid>
-        <Grid item>MINS</Grid>
-        <Grid item>:</Grid>
-        <Grid item>SECS</Grid>
-    </Grid>
-    </div>;
+    return <div style={{textAlign:"center"}}>
+      <div className="primary-text-color" style={{display:"flex", justifyContent:"space-evenly"}}>
+        <h3>{days}</h3>
+        <h3>:</h3>
+        <h3>{hours}</h3>
+        <h3>:</h3>
+        <h3>{minutes}</h3>
+        <h3>:</h3>
+        <h3>{seconds}</h3>
+      </div>
+      <div style={{display:"flex", justifyContent:"space-around", color:"grey"}}>
+        <h4>DAYS</h4>
+        <h4>HRS</h4>
+        <h4>MINS</h4>
+        <h4>SECS</h4>
+      </div>
+    </div>
   }
 };
 
@@ -63,7 +60,7 @@ const renderer = ({days, hours, minutes, seconds, completed }) => {
           </Typography>
           </Grid>
          <MainEventMatch mainEvent={mainEvent} upcomingEvent={upcomingEvent} upcomingEventLoading={upcomingEventLoading} mainEventLoading={mainEventLoading}/>
-        <Grid item  md={3}>
+        <Grid item style={{textAlign:"center"}}  md={3}>
           <h2 className={classes.eventCounterText}>COUNTDOWN</h2>
           {!upcomingEvent.date ? <Skeleton style={{background:"grey"}} /> : <Countdown
           date={upcomingEvent.earlyPrelimTime || upcomingEvent.prelimTime || upcomingEvent.mainCardTime || upcomingEvent.date} 

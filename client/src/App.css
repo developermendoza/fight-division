@@ -12,11 +12,20 @@ body{
 }
 
 a.logo{
-  color: #68BBE5;
+  font-family: 'Monoton', cursive;
+  font-weight: bold;
+}
+
+a.logo{
+  color: #ea5455;
 }
 
 li{
   list-style-type: none;
+}
+
+.nav-buttons:hover{
+  color: #ea5455!important;
 }
 
 a.btn{

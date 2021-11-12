@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   topNavbar:{
-    backgroundColor:"black"
+    backgroundColor:"#262626"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   bottomNavbar:{
-    backgroundColor:"#111111",
+    backgroundColor:"#262626",
     top: "60px"
   }
 }));

@@ -16,7 +16,7 @@ function Footer() {
       <Container>
         <Grid container space={2} justify="space-between">
           <Grid className={classes.footerSection} item xs={12} md={3}>
-            <h4 className={classes.title}>Fight Division</h4>
+          <img style={{width:"200px"}} src="./images/logo-icon.png" alt="" />
             <p className={classes.description}> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
           </Grid>
           <Grid className={classes.footerSection} item xs={12} md={2}>
@@ -45,7 +45,7 @@ function Footer() {
     </footer>
     <div className={classes.bottomFooter}>
     <Container>
-      <small>&copy; 2021 All rights reserved. <span>Fighter Division</span></small>
+      <small>&copy; 2021 All rights reserved. <span>Fight Division</span></small>
     </Container>
     </div>
     </>

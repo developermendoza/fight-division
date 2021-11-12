@@ -30,6 +30,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+// import logoIcon from "/images/logo-icon.png";
 
 const StyledMenu = withStyles({
   paper: {
@@ -137,7 +138,7 @@ export default function Navbar() {
     <div className={classes.root}>
       <AppBar  className={classes.topNavbar}>
       <Container>
-        <Toolbar>
+        <Toolbar style={{display:"flex", justifyContent:"space-between"}}>
         {!matches &&<>
           <IconButton onClick={toggleDrawer("left", true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
@@ -151,9 +152,12 @@ export default function Navbar() {
             {list("left")}
           </SwipeableDrawer>
         </> }
-          <Typography component={Link} to="/" variant="h4" color="inherit" style={{textAlign: !matches? "right" : "left" }} className={`${classes.title} logo`}>
-            FIGHT DIVISION
-          </Typography>
+          {/* <Typography component={Link} to="/" variant="h4" color="inherit" style={{textAlign: !matches? "right" : "left" }} className={`${classes.title} logo`}>
+            FIGHT <span>DIVISION</span>
+          </Typography> */}
+          <a href="/" className="logo" style={{textAlign:"center", display:"flex", alignItems:"center"}}>
+            <img style={{width:"100%", height:"40px", marginRight:"5px"}} src="./images/logo-icon.png" alt="" />
+          </a>
           {matches && <>
             {/* {user ? <Button  onClick={handleLogout} color="inherit">Logout</Button>  */}
             {user ?  <div>
@@ -206,10 +210,11 @@ export default function Navbar() {
           <ListItemText primary="Logout" />
         </StyledMenuItem>
       </StyledMenu>
-    </div> : <>
-            <Button component={Link} to="/login" color="inherit" className="btn">Login</Button>
-          <Button component={Link} to="/register" color="inherit" className="btn btn-primary">Signup</Button>
-          </>}
+    </div> : <div>
+            <Button component={Link} to="/login" className="nav-buttons" color="inherit" style={{fontWeight:"bold", color:"grey"}} >Login</Button>
+            <span>|</span>
+          <Button component={Link} to="/register" className="nav-buttons" color="inherit" style={{fontWeight:"bold", color:"grey"}}>Signup</Button>
+          </div>}
           </>}
         </Toolbar>
         </Container>
