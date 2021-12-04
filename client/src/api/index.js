@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" })
-const APIADMIN = axios.create({ baseURL: "http://localhost:5000/admin" })
+// const API = axios.create({ baseURL: "http://localhost:5000" })
+const API = axios.create({ baseURL: "https://fight-division.herokuapp.com" })
+// const APIADMIN = axios.create({ baseURL: "http://localhost:5000/admin" })
+const APIADMIN = axios.create({ baseURL: "https://fight-division.herokuapp.com/admin" })
 
 export const registerUser = (newUser) => API.post(`/users/register`, newUser);
 export const loginUser = (user) => API.post(`/users/login`, user);
