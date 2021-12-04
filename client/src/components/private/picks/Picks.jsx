@@ -73,6 +73,7 @@ function Picks() {
   }
 
   const handleEventChange = (e) => {
+    setStepEnabled("blue")
     setEvent({
      [e.target.name] : e.target.value
     });
@@ -339,13 +340,6 @@ const handleSubmit = e => {
     </div>
   )
 
-  // const submitPicks = () => {
-  //   getMatchesByEventId(event.id)
-  //   return(
-
-  //   )
-  // }
-
 
   const getStepContent = (stepIndex) => {
     switch (stepIndex) {
@@ -595,7 +589,7 @@ console.log("activeStep: ", activeStep)
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div>
+            <div style={{marginTop:"40px", textAlign:"center"}}>
               <Button
                 style={{background:"grey"}}
                 disabled={activeStep === 0}
