@@ -14,9 +14,9 @@ function HeroText(props){
   return (
     <div {...props}>
       <div className={classes.heroText} style={{width: matches  ? "40%" : "100%"}}>
-          <h3 className="primary-text-color">LOREM IPSUM</h3>
+          <h3 className="primary-text-color">PLAY TODAY</h3>
           <h1>Fight Division</h1>
-          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+          <p>Join to fight to become the best Fight Division member!</p>
         </div>
         <br />
         <Button component={Link} to="/register" className="btn btn-secondary">Signup</Button>

@@ -5,6 +5,9 @@ import { FETCH_MATCHES,
   UPDATE_MATCH, 
   FETCH_MATCHES_BY_EVENT_ID,
   FETCH_MATCHES_BY_EVENT_ID_SUCCESS,
+  FETCH_UPCOMING_MAIN_EVENT_MATCHES,
+  FETCH_UPCOMING_MAIN_EVENT_MATCHES_SUCCESS,
+  FETCH_UPCOMING_MAIN_EVENT_MATCHES_ERROR,
   FETCH_MATCHES_BY_EVENT_ID_ERROR  } from "../constants/actionTypes";
 
 export const getMatchesByEventId = (id) => async (dispatch) => {
@@ -16,6 +19,16 @@ export const getMatchesByEventId = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({type:FETCH_MATCHES_BY_EVENT_ID_ERROR, payload:error});
     console.log(error.message)
+  }
+}
+
+export const getUpcomingMainEventMatches = () => async (dispatch) => {
+  dispatch({type:FETCH_UPCOMING_MAIN_EVENT_MATCHES});
+  try {
+    const {data} = await api.fetchUpcomingMainEventMatches();
+    dispatch({type:FETCH_UPCOMING_MAIN_EVENT_MATCHES_SUCCESS, payload:data});
+  } catch (error) {
+    dispatch({type:FETCH_UPCOMING_MAIN_EVENT_MATCHES_ERROR, payload:error});
   }
 }
 

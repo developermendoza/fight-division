@@ -1,14 +1,20 @@
 import { FETCH_ALL, 
   FETCH_UPCOMING_EVENT, 
+  FETCH_UPCOMING_EVENTS, 
   ADD_EVENT, 
   DELETE_EVENT, 
   UPDATE_EVENT,
-  FETCH_EVENTS_IDLE,
+  FETCH_EVENTS_IDLES,
   FETCH_EVENTS, 
   FETCH_EVENTS_SUCCESS, 
   FETCH_EVENTS_ERROR,
   FETCH_UPCOMING_EVENT_SUCCESS,
-  FETCH_UPCOMING_EVENT_ERROR
+  FETCH_UPCOMING_EVENT_ERROR,
+  FETCH_UPCOMING_EVENTS_SUCCESS,
+  FETCH_UPCOMING_EVENTS_ERROR,
+  FETCH_UPCOMING_MAIN_EVENTS,
+  FETCH_UPCOMING_MAIN_EVENTS_SUCCESS,
+  FETCH_UPCOMING_MAIN_EVENTS_ERROR
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -61,6 +67,44 @@ const initialState = {
           fetchInProgress: false,
           error: action?.payload,
         }
+    case FETCH_UPCOMING_MAIN_EVENTS:
+      return {
+        ...state,
+        fetchInProgress: true,
+        error: null
+      }
+      case FETCH_UPCOMING_MAIN_EVENTS_SUCCESS: 
+          return {
+            ...state,
+            data:action?.payload,
+            error:null,
+            fetchInProgress: false,
+          }
+      case FETCH_UPCOMING_MAIN_EVENTS_ERROR:
+          return {
+            ...state,
+            fetchInProgress: false,
+            error: action?.payload,
+          }
+    case FETCH_UPCOMING_EVENTS:
+      return {
+        ...state,
+        fetchInProgress: true,
+        error: null
+      }
+    case FETCH_UPCOMING_EVENTS_SUCCESS: 
+      return {
+        ...state,
+        data:action?.payload,
+        error:null,
+        fetchInProgress: false,
+      }
+    case FETCH_UPCOMING_EVENTS_ERROR:
+      return {
+        ...state,
+        fetchInProgress: false,
+        error: action?.payload,
+      }
     case ADD_EVENT:
         return {
           ...state,

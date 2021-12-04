@@ -13,10 +13,23 @@ export const getMatches = async (req, res) => {
   }
 }
 
+export const getUpcomingMainEventMatches = async (req, res) => {
+  const today = new Date();
+  try {
+    // const matches = await Match.find({isMainEvent:true}).populate("fighter1 fighter2 event weight");
+    const matches = await Match.find({isMainEvent:true}).populate("fighter1 fighter2 event weight").populate({path: "event", match: {date: {$gte:today}}});
+
+    console.log("matches ", matches.length)
+    res.status(200).json(matches)
+  } catch (error) {
+    res.status(404).json(error)
+  }
+}
+
 export const getMatchesByEventId = async (req, res) => {
   try {
     const { id } = req.params;
-    const matches = await Match.find({event: id}).populate("fighter1 fighter2 event weight");
+    const matches = await Match.find({event: id}).populate("fighter1 fighter2 event weight").sort({matchOrder: 1});
     res.status(200).json(matches)
   } catch (error) {
     res.status(404).json(error)

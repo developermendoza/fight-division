@@ -3,7 +3,10 @@ import { FETCH_MAIN_EVENT_MATCH,
   ADD_MATCH, UPDATE_MATCH,
   FETCH_MATCHES_BY_EVENT_ID,
   FETCH_MATCHES_BY_EVENT_ID_SUCCESS,
-  FETCH_MATCHES_BY_EVENT_ID_ERROR
+  FETCH_MATCHES_BY_EVENT_ID_ERROR,
+  FETCH_UPCOMING_MAIN_EVENT_MATCHES,
+  FETCH_UPCOMING_MAIN_EVENT_MATCHES_SUCCESS,
+  FETCH_UPCOMING_MAIN_EVENT_MATCHES_ERROR
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -21,7 +24,25 @@ const matchesReducer = (state=initialState, action ) => {
         data:action?.payload,
         fetchInProgress: true,
       }
-
+    case FETCH_UPCOMING_MAIN_EVENT_MATCHES:
+      return {
+        ...state,
+        data:action?.payload,
+        fetchInProgress: true,
+      }
+    case FETCH_UPCOMING_MAIN_EVENT_MATCHES_SUCCESS:
+      return {
+        ...state,
+        data: action?.payload,
+        error:null,
+        fetchInProgress: false,
+      }
+    case FETCH_UPCOMING_MAIN_EVENT_MATCHES_ERROR:
+      return {
+        ...state,
+        fetchInProgress: false,
+        error: action?.payload
+      }
     case ADD_MATCH:{
       return {
         ...state,

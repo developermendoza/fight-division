@@ -7,7 +7,6 @@ import moment from "moment";
 
 function Dashboard() {
   const user = localStorage.getItem("authorized") ? JSON.parse(localStorage.getItem("authorized"))  : null;
-  console.log("user: ", user.result)
   const classes = useStyles();
   return (
     <Container maxWidth="md">

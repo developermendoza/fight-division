@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -22,19 +22,19 @@ import EventSeatIcon from '@material-ui/icons/EventSeat';
 import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
 import WcIcon from '@material-ui/icons/Wc';
 import {
-  BrowserRouter as Router,
   Switch,
   Link,
   Route,
+  useHistory,
   useRouteMatch
 } from "react-router-dom";
+
 import Home from './Home';
-import Events from './events/Events';
-import Matches from './matches/Matches';
-import Fighters from './fighters/Fighters';
-import { getUsers } from '../../actions/users';
-import { useDispatch, useSelector } from 'react-redux';
 import AdminSections from './AdminSections';
+import AdminLogin from './AdminLogin';
+import { adminUserAuthenticated, adminLogout } from "../../utils";
+import { Button } from '@material-ui/core';
+
 
 const drawerWidth = 240;
 
@@ -116,19 +116,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Admin({match}) {
-  console.log("match: ", match)
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [section, setSection] = React.useState("users");
   let { path, url } = useRouteMatch();
-  
-  
-  console.log("path: ", path)
-  console.log("url: ", url)
+  const history = useHistory();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
+  const handleLogout = () => {
+    adminLogout()
+    history.push("/admin")
+  }
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -137,6 +139,9 @@ function Admin({match}) {
   const showComponent = (text) => {
     setSection(text)
   }
+
+
+  if(!adminUserAuthenticated()) return <AdminLogin />
 
   return (
     <div>
@@ -163,7 +168,9 @@ function Admin({match}) {
           <Typography variant="h6" noWrap className={classes.title}>
             Admin - <span style={{fontWeight:"bold", fontStyle:"italic", fontSize:"16px"}}>{section}</span>
           </Typography>
-          
+          <Button color="warning" variant="contained" onClick={handleLogout}>
+                Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -231,14 +238,9 @@ function Admin({match}) {
             <Route path={`${path}/:adminSection`}>
               <AdminSections />
             </Route>
-            {/* <Route path={`${path}/:adminSection`} component={AdminSections}/> */}
-            {/* <Route path={`${path}/events`} component={Events}/>
-            <Route path={`${match.url}/matches`} component={Matches} exact/>
-            <Route path={`${match.url}/fighters`} component={Fighters} exact/> */}
           </Switch>
       </main>
     </div>
-    
     </div>
   )
 }

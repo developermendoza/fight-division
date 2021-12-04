@@ -92,3 +92,195 @@ a.btn.btn.btn-secondary:hover{
 .register-upload-image button{
   font-size: 12px;
 }
+
+.picks-container{
+  background:#1D1D1D;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+
+.pick-container{
+  background:#494949; 
+  margin-bottom:20px!important;
+  position:relative;
+}
+
+.pick-section-title{
+  text-align:center;
+  padding:5px;
+  font-size:10px;
+  font-weight:bold
+}
+
+.picks-fighter{
+  background-color:#959595!important;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 10px;
+}
+
+.picks-fighter.selected, .picks-fighter.round.selected{
+  background-color:#527DFF!important;
+  color:white;
+}
+
+.picks-fighter.round{
+  text-align: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.picks-fighter.outcome{
+  background:#959595;
+  padding:5px;
+  height:30px;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.picks-label{
+  position:relative;
+  cursor: pointer;
+}
+
+.picks-radio {
+  position:absolute!important;
+  left:0;
+  top:0;
+  visibility: hidden;
+}
+
+.picks-fighter-name{
+  text-align:center;
+}
+
+.odds-container{
+  position:relative;
+}
+
+.picks-odds{
+  background:#252525;
+  padding:5px;
+  border-radius:5px;
+  color:#FF6A6A;
+  position:absolute;
+  bottom:-25px;
+  right:-5px;
+}
+
+.picks-odds.favorite{
+  color:#7F96FF;
+}
+
+.full-pick-list-tab{
+  display:block;
+  text-align:center;
+}
+
+.picks-list {
+  display:none;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  max-width: 500px;
+  z-index: 1;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.picks-list::-webkit-scrollbar {
+  width: 10px;
+  }
+
+  /* Track */
+  .picks-list::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  .picks-list::-webkit-scrollbar-thumb {
+    background: #EA5455; 
+  }
+
+  /* Handle on hover */
+  .picks-list::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+.picks-list.show{
+  display:block;
+  height:60px;
+}
+
+.picks-list.show-full-list{
+  height:auto;
+}
+
+.MuiStepIcon-root.MuiStepIcon-active{
+  color:#FDF100!important;
+  font-weight: bold;
+}
+
+.MuiStepIcon-root.MuiStepIcon-active .MuiStepIcon-text {
+  fill: black!important;
+}
+
+.MuiStepLabel-label.MuiStepLabel-active{
+  color: white!important;
+  font-weight: bold!important;
+}
+
+.MuiStepIcon-root{
+  color: grey!important;
+}
+
+.MuiStepLabel-label{
+  color:grey!important;
+}
+
+@media only screen and (min-width: 960px) {
+
+  .full-pick-list-tab{
+    display:none;
+  }
+  .picks-list {
+    display:block;
+    position:static;
+    max-width: auto;
+    max-height: 100%;
+    overflow-y:auto;
+  }
+  .picks-list.show{
+    height:auto;
+  }
+
+  .picks-container{
+    max-height: 970px;
+    overflow-y: scroll;
+  }
+
+  /* width */
+  .picks-container::-webkit-scrollbar {
+  width: 10px;
+  }
+
+  /* Track */
+  .picks-container::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  .picks-container::-webkit-scrollbar-thumb {
+    background: #EA5455; 
+  }
+
+  /* Handle on hover */
+  .picks-container::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+}

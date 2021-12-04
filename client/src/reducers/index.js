@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import auth from "./auth";
+import adminAuth from "./adminAuth";
 import users from "./users";
 import events from "./events";
 import matches from "./matches";
@@ -13,6 +14,7 @@ import picks from "./picks";
 
 export default combineReducers({
   auth,
+  adminAuth,
   users,
   events,
   matches,

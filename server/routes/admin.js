@@ -1,6 +1,7 @@
 import express from "express";
 
 import { getUsers, addUser, deleteUser, getUser, updateUser } from "../controllers/admin/users.js";
+import { adminUser } from "../controllers/admin/login.js";
 import { getNetworks, getNetwork} from "../controllers/admin/networks.js";
 import { getEvents, addEvent, deleteEvent, updateEvent } from "../controllers/admin/events.js";
 import { getMatches, deleteMatch, addMatch, updateMatch } from "../controllers/admin/matches.js";
@@ -39,6 +40,8 @@ router.get("/organizations", getOrganizations);
 router.get("/weights", getWeights);
 
 router.post("/picks", addPicks);
+
+router.post("/", adminUser);
 
 
 export default router;

@@ -27,6 +27,7 @@ import  Events  from './components/admin/events/Events';
 import  Fighters  from './components/admin/fighters/Fighters';
 import  Matches  from './components/admin/matches/Matches';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import PickEvent from './components/private/pickEvent/PickEvent';
 
 const drawerWidth = 240;
 
@@ -108,6 +109,7 @@ function App() {
       <PublicRoute restricted={true}  path="/logout" component={Logout} />
       <PrivateRoute path="/dashboard" component={Dashboard}  />
       <PrivateRoute path="/picks" component={Picks}  />
+      <PrivateRoute path="/picks-event" component={PickEvent}  />
       <Route path='/admin' component={Admin} />
        <PublicRoute restricted={false}  path="*" component={NotFound}/>
       </Switch>

@@ -42,6 +42,10 @@ const eventSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Organization"
   },
+  mainEvent:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Match"
+  },
   createdAt:{
     type: Date,
     default: new Date()

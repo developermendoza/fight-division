@@ -11,6 +11,28 @@ export const getEvents = async (req, res) => {
     res.status(404).json(error)
   }
 }
+
+export const getUpcomingEvents = async (req, res) => {
+  try {
+    const today = new Date();
+    const events = await Event.find({date: {$gte:today}}).populate("mainCardNetwork prelimNetwork earlyPrelimNetwork organization").populate({path:"mainEvent", populate:{path:"fighter1"}}).populate({path:"mainEvent", populate:{path:"fighter2"}})
+
+    res.status(200).json(events)
+  } catch (error) {
+    res.status(404).json(error)
+  }
+}
+
+export const getUpcomingMainEvents = async (req, res) => {
+  const today = new Date();
+  try {
+    const matches = await Match.find({isMainEvent:true}).populate("fighter1 fighter2 event weight").populate({path: "event", match: {date: {$gte:today}}});
+
+    res.status(200).json(matches)
+  } catch (error) {
+    res.status(404).json(error)
+  }
+}
 export const getUpcomingEvent = async (req, res) => {
   
   try {
