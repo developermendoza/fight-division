@@ -28,6 +28,8 @@ app.use(cors());
 
 app.use(express.json());
 
+console.log("process.env.NODE_ENV: ", process.env.NODE_ENV)
+
 // Serve static assets if in production
 // if(process.env.NODE_ENV === "production"){
 // //   //set static folder
