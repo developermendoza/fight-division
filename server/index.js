@@ -14,10 +14,10 @@ import organizationsRoutes from "./routes/organizations.js";
 import sportsRoutes from "./routes/sports.js";
 import weightsRoutes from "./routes/weights.js";
 import matchOutcomeMethodsRoutes from "./routes/matchOutcomeMethods.js";
-import { dirname } from 'path';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // const __dirname = path.resolve();
 
 dotenv.config();
@@ -36,7 +36,7 @@ app.use(express.json());
 // Serve static assets if in production
 if(process.env.NODE_ENV === "production"){
   app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'), function(err) {
+    res.sendFile(path.join(__dirname, '/client/build/index.html'), function(err) {
        if (err) {
          console.log("testing testing testing")
           res.status(500).send(err)
