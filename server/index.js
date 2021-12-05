@@ -38,8 +38,8 @@ if(process.env.NODE_ENV === "production"){
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, "../client/build/index.html"), function(err) {
        if (err) {
-         console.log("__dirname: ", __dirname)
-         console.log("path: ", path)
+         console.log("__DIRNAME: ", __dirname)
+         console.log("PATH: ", path)
          console.log("testing testing testing")
           res.status(500).send(err)
        }
