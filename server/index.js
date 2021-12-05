@@ -42,7 +42,6 @@ if(process.env.NODE_ENV === "production"){
     res.sendFile(path.join(__dirname, "client", "build", "index.html"), function(err) {
        if (err) {
          console.log("__DIRNAME: ", __dirname)
-         console.log("PATH: ", resolvedPath)
          console.log("testing testing testing")
           res.status(500).send(err)
        }
