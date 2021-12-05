@@ -14,13 +14,11 @@ import organizationsRoutes from "./routes/organizations.js";
 import sportsRoutes from "./routes/sports.js";
 import weightsRoutes from "./routes/weights.js";
 import matchOutcomeMethodsRoutes from "./routes/matchOutcomeMethods.js";
-import path from 'path';
-// import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url';
+import  path  from 'path';
 
-// const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 const app = express();
