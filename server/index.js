@@ -14,14 +14,10 @@ import organizationsRoutes from "./routes/organizations.js";
 import sportsRoutes from "./routes/sports.js";
 import weightsRoutes from "./routes/weights.js";
 import matchOutcomeMethodsRoutes from "./routes/matchOutcomeMethods.js";
-import path from "path";
-
-import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+const __dirname = dirname(fileURLToPath(import.meta.url));
 // const __dirname = path.resolve();
 
 dotenv.config();
@@ -38,14 +34,14 @@ app.use(express.json());
 
 // console.log("__dirname: ", __dirname)
 // Serve static assets if in production
-// if(process.env.NODE_ENV === "production"){
-// //   //set static folder
-//   app.use(express.static('client/build'));
+if(process.env.NODE_ENV === "production"){
+//   //set static folder
+  app.use(express.static('client/build'));
 
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
-//   })
-// }
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
