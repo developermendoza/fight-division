@@ -15,9 +15,9 @@ import sportsRoutes from "./routes/sports.js";
 import weightsRoutes from "./routes/weights.js";
 import matchOutcomeMethodsRoutes from "./routes/matchOutcomeMethods.js";
 import path from 'path';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
@@ -37,7 +37,7 @@ app.use(express.json());
 // console.log("__dirname: ", __dirname)
 // Serve static assets if in production
 if(process.env.NODE_ENV === "production"){
-
+  app.use(express.static("client/build"));
   app.get('/*', function(req, res) {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"), function(err) {
        if (err) {
