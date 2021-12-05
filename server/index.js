@@ -39,7 +39,7 @@ app.use(express.json());
 if(process.env.NODE_ENV === "production"){
 
   app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"), function(err) {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"), function(err) {
        if (err) {
          console.log("__DIRNAME: ", __dirname)
          console.log("testing testing testing")
