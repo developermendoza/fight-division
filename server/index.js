@@ -36,7 +36,7 @@ app.use(express.json());
 // Serve static assets if in production
 if(process.env.NODE_ENV === "production"){
   app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'), function(err) {
+    res.sendFile(path.join(__dirname, "client", "build"), function(err) {
        if (err) {
          console.log("__dirname: ", __dirname)
          console.log("path: ", path)
