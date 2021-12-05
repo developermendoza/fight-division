@@ -17,8 +17,7 @@ import matchOutcomeMethodsRoutes from "./routes/matchOutcomeMethods.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const filePath = "./public/index.html";
-const resolvedPath = path.resolve(filePath);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
@@ -39,18 +38,16 @@ app.use(express.json());
 // Serve static assets if in production
 if(process.env.NODE_ENV === "production"){
 
-  console.log(resolvedPath);
- return res.sendFile(resolvedPath);
-//   app.get('/*', function(req, res) {
-//     res.sendFile(path.join(__dirname, "../client/build/index.html"), function(err) {
-//        if (err) {
-//          console.log("__DIRNAME: ", __dirname)
-//          console.log("PATH: ", path)
-//          console.log("testing testing testing")
-//           res.status(500).send(err)
-//        }
-//     })
-//  })
+  app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"), function(err) {
+       if (err) {
+         console.log("__DIRNAME: ", __dirname)
+         console.log("PATH: ", resolvedPath)
+         console.log("testing testing testing")
+          res.status(500).send(err)
+       }
+    })
+ })
 }
 
 app.use(function(req, res, next) {
@@ -62,23 +59,6 @@ app.use(function(req, res, next) {
 
 
 const PORT = process.env.PORT || 5000;
-
-if(process.env.NODE_ENV === "production"){
-  //set static folder
-  app.use(express.static('client/build'));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"), function(err) {
-      if (err) {
-        console.log("__DIRNAME: ", __dirname)
-        console.log("PATH: ", path)
-        console.log("testing testing testing")
-         res.status(500).send(err)
-      }
-   })
-  })
-}
-
 
 
 mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true, useUnifiedTopology:true})
