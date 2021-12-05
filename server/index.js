@@ -39,6 +39,7 @@ if(process.env.NODE_ENV === "production"){
 
   res.sendFile(path.join(__dirname, "client", "build"), function(err) {
     if (err) {
+      console.log("process.env.NODE_ENV: ", process.env.NODE_ENV)
        res.status(500).send(err)
     }
  })
