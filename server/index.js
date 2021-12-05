@@ -62,6 +62,10 @@ mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true, useUnifiedTop
   .then( () => app.listen(PORT, ()=>console.log(`server running on port: ${PORT}`)))
   .catch((error) => console.log("error connecting to the database: ", error.message));
 
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+ }
+
   app.use("/users", userRoutes)
   app.use("/admin", adminRoutes)
   app.use("/weights", weightsRoutes)
