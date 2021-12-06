@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   title:{
-    fontSize: "3rem"
+    fontSize: "2.5rem"
   },
 
  section:{
