@@ -10,7 +10,7 @@ function Dashboard() {
   const classes = useStyles();
   return (
     <Container maxWidth="md">
-      <Box className={classes.box}>
+      <Box className={classes.box} style={{marginTop:"120px"}}>
         <Grid container>
           <Grid item xs={12} md={6}>
             <div className={classes.iconGrid}>
