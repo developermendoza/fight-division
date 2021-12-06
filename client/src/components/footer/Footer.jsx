@@ -17,7 +17,7 @@ function Footer() {
         <Grid container space={2} justify="space-between">
           <Grid className={classes.footerSection} item xs={12} md={3}>
           <img style={{width:"200px"}} src="./images/logo-icon.png" alt="" />
-            <p className={classes.description}> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p className={classes.description}> It was <Link style={{color:"grey"}} to="/admin">popularised</Link> in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
           </Grid>
           <Grid className={classes.footerSection} item xs={12} md={2}>
             <h4 className={classes.title}>EXPLORE</h4>
@@ -36,8 +36,8 @@ function Footer() {
           </Grid>
           <Grid className={classes.footerSection} item xs={12} md={2}>
             <h4 className={classes.title}>JOIN</h4>
-            <a className={classes.links} href="/register">Register</a><span> | </span>
-            <a className={classes.links} href="/login">Login</a>
+            <Link className={classes.links} to="/register">Register</Link><span> | </span>
+            <Link className={classes.links} to="/login">Login</Link>
           </Grid>
         </Grid>
       </Container>

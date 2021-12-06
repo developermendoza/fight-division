@@ -14,6 +14,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+// import HomeIcon from '@material-ui/icons/Home';
 import { useStyles } from "./styles";
 import { withStyles } from '@material-ui/core/styles';
 
@@ -23,13 +24,15 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Avatar, Container } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SendIcon from '@material-ui/icons/Send';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+// import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // import logoIcon from "/images/logo-icon.png";
 
 const StyledMenu = withStyles({
@@ -113,22 +116,20 @@ export default function Navbar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItem component={Link} to="/">
+              <ListItemIcon><HomeIcon /> </ListItemIcon>
+              <ListItemText primary="Home" />
           </ListItem>
-        ))}
+            <ListItem component={Link} to="/register">
+              <ListItemIcon><VpnKeyIcon /> </ListItemIcon>
+              <ListItemText primary="Register" />
+          </ListItem>
+            <ListItem component={Link} to="/login">
+              <ListItemIcon><ExitToAppIcon /> </ListItemIcon>
+              <ListItemText primary="Login" />
+          </ListItem>
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </div>
   );
 
@@ -150,9 +151,9 @@ export default function Navbar() {
             {list("left")}
           </SwipeableDrawer>
         </> }
-          <a href="/" className="logo" style={{textAlign:"center", display:"flex", alignItems:"center"}}>
-            <img style={{width:"100%", height:"40px", marginRight:"5px"}} src="./images/logo-icon.png" alt="" />
-          </a>
+          <Link to="/" className="logo" style={{textAlign:"center", display:"flex", alignItems:"center"}}>
+            <img style={{width:"110px", height:"40px", marginRight:"5px"}} src="./images/logo-icon.png" alt="" />
+          </Link>
           {matches && <>
             {user ?  <div>
       <Avatar src={user.result.image} style={{cursor:"pointer", width:"30px", height:"30px"}} onClick={handleClick}/>
